@@ -17,14 +17,14 @@ public:
     void setStatut(bool statut);
     int getDirection() const;
     void setDirection(int direction);
-    double getPowerUpEaten();
+    double getTimePowerUpEaten();
     void setPowerUpEaten();
     const double powerUpDuration = 1; //second
 private:
     double X, Y;
     bool statut;
     int direction;
-    double powerUpEaten;
+    double timePowerUpEaten;
 };
 
 

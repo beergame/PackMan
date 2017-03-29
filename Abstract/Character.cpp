@@ -43,13 +43,13 @@ void Character::setDirection(int direction) {
     Character::direction = direction;
 }
 
-double Character::getPowerUpEaten() {
-    return powerUpEaten;
+double Character::getTimePowerUpEaten() {
+    return timePowerUpEaten;
 }
 
 /*
  * Save elapsedTime the last time Packman has eaten a power-up
  */
 void Character::setPowerUpEaten() {
-    powerUpEaten = TimeManager::GetInstance().GetElapsedTime() / 1000;
+    timePowerUpEaten = TimeManager::GetInstance().GetElapsedTime() / 1000;
 }

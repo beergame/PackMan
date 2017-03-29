@@ -12,7 +12,7 @@ void Packman::Update() {
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
 
     // Check if power-up expire
-    double diff = time - Packman::getPowerUpEaten();
+    double diff = time - Packman::getTimePowerUpEaten();
     if (diff > Packman::powerUpDuration) {
         setStatut(0);
     }
