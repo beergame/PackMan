@@ -4,7 +4,7 @@ Packman::Packman() {
     setX(0);
     setY(0);
     setStatut(0);
-    setPowerUpEaten();
+    setTimePowerUpEaten();
 }
 
 void Packman::Update(Map map) {
@@ -56,7 +56,7 @@ void Packman::Update(Map map) {
             setX(newX);
             setY(newY);
             map.cleanElement(newX, newY);
-            setPowerUpEaten();
+            setTimePowerUpEaten();
             setStatut(1);
             map.changeStatusMonster();
             break;

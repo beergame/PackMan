@@ -50,6 +50,6 @@ double Character::getTimePowerUpEaten() {
 /*
  * Save elapsedTime the last time Packman has eaten a power-up
  */
-void Character::setPowerUpEaten() {
+void Character::setTimePowerUpEaten() {
     timePowerUpEaten = TimeManager::GetInstance().GetElapsedTime() / 1000;
 }

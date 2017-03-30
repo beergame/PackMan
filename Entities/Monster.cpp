@@ -4,7 +4,7 @@ Monster::Monster() {
     setX(0);
     setY(0);
     setStatut(0);
-    setPowerUpEaten();
+    setTimePowerUpEaten();
     changeDirection();
 }
 

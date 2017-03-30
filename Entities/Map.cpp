@@ -43,6 +43,7 @@ void Map::addMonster(Monster monster) {
 
 void Map::changeStatusMonster() {
     for (auto &monster: monsterList) {
+        monster.setTimePowerUpEaten();
         monster.setStatut(1);
     }
 }

@@ -18,7 +18,7 @@ public:
     int getDirection() const;
     void setDirection(int direction);
     double getTimePowerUpEaten();
-    void setPowerUpEaten();
+    void setTimePowerUpEaten();
     const double powerUpDuration = 1; //second
 private:
     double X, Y;
