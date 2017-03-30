@@ -3,11 +3,12 @@
 
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
+#include "Map.hh"
 
 class Packman : public Character{
 public:
     Packman();
-    void Update();
+    void Update(Map);
 };
 
 

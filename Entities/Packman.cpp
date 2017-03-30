@@ -7,9 +7,12 @@ Packman::Packman() {
     setPowerUpEaten();
 }
 
-void Packman::Update() {
+void Packman::Update(Map map) {
     int direction = getDirection();
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
+    double newX = 0;
+    double newY = 0;
+    int element = nullptr;
 
     // Check if power-up expire
     double diff = time - Packman::getTimePowerUpEaten();
@@ -19,20 +22,47 @@ void Packman::Update() {
 
     switch (direction) {
         case 1:
-            setY(getY() + time);
+            newX = getX();
+            newY = getY() + time;
             break;
         case 2:
-            setX(getX() + time);
+            newX = getX() + time;
+            newY = getY();
             break;
         case 3:
-            setY(getY() - time);
+            newX = getX();
+            newY = getY() - time;
             break;
         case 4:
-            setX(getX() - time);
+            newX = getX() - time;
+            newY = getY();
             break;
         default:
             break;
     };
 
-    //@TODO Check map if there is a power up to be eaten then change status to 1 and use setPowerUpEaten.
+    element = map.checkMap(newX, newY);
+    switch (element) {
+        case 0:
+            setX(newX);
+            setY(newY);
+            break;
+        case 1:
+            setX(newX);
+            setY(newY);
+            map.cleanElement(newX, newY);
+            break;
+        case 2:
+            setX(newX);
+            setY(newY);
+            map.cleanElement(newX, newY);
+            setPowerUpEaten();
+            setStatut(1);
+            map.changeStatusMonster();
+            break;
+        case 3:
+        default:
+            break;
+    }
+
 }
