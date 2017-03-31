@@ -7,7 +7,10 @@
 
 class MonsterFactory {
 public:
-    MonsterFactory(Map);
+    MonsterFactory(Map*);
+
+private:
+    void CreateMonster(Map*);
 };
 
 

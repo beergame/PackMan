@@ -1,10 +1,14 @@
 #include "MonsterFactory.hh"
 
+MonsterFactory::MonsterFactory(Map* map) {
+    CreateMonster(map);
+}
+
 /**
  * Factory, @TODO temp coordinate to change when map is set up
  * @param map
  */
-MonsterFactory::MonsterFactory(Map map) {
+void MonsterFactory::CreateMonster(Map* map) {
     Monster *monster1 = new Monster();
     monster1->setX(0);
     monster1->setY(0);
