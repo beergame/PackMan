@@ -8,15 +8,15 @@
 class Map {
 private:
     std::vector<std::vector<int>> map;
-    std::vector<Monster> monsterList;
+    std::vector<Monster*> monsterList;
 
 public:
     int checkMap(double, double);
     Map(std::vector<std::vector<int>>);
     std::vector<std::vector<int>> getMap();
     void cleanElement(double, double);
-    std::vector<Monster> getMonsterList();
-    void addMonster(Monster);
+    std::vector<Monster*> getMonsterList();
+    void addMonster(Monster*);
     void changeStatusMonster();
 };
 

@@ -1,5 +1,8 @@
 #include "Packman.hh"
 
+/**
+ * @TODO Temp coordinate, to change when the map is set up
+ */
 Packman::Packman() {
     setX(0);
     setY(0);

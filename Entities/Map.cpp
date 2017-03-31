@@ -33,17 +33,17 @@ void Map::cleanElement(double X, double Y) {
     map[PositionX][PositionY] = 0;
 }
 
-std::vector<Monster> Map::getMonsterList() {
+std::vector<Monster*> Map::getMonsterList() {
     return monsterList;
 }
 
-void Map::addMonster(Monster monster) {
+void Map::addMonster(Monster* monster) {
     monsterList.push_back(monster);
 }
 
 void Map::changeStatusMonster() {
-    for (auto &monster: monsterList) {
-        monster.setTimePowerUpEaten();
-        monster.setStatut(1);
+    for (auto monster : monsterList) {
+        monster->setTimePowerUpEaten();
+        monster->setStatut(1);
     }
 }
