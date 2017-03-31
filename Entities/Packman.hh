@@ -4,10 +4,11 @@
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
 #include "Map.hh"
+#include "../Utils/IObservable.hh"
 
-class Packman : public Character{
+class Packman : public Character, IObservable{
 public:
-    Packman();
+    Packman(IObserver*);
     void Update(Map);
 };
 

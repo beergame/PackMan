@@ -19,7 +19,7 @@ void MonsterFactory::CreateMonster(Map* map) {
     monster3->setX(0);
     monster3->setY(0);
 
-    map.addMonster(monster1);
-    map.addMonster(monster2);
-    map.addMonster(monster3);
+    map->addMonster(monster1);
+    map->addMonster(monster2);
+    map->addMonster(monster3);
 }
