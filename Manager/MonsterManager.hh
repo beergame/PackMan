@@ -12,12 +12,10 @@ class MonsterManager : public IObserver{
 
 private:
     std::vector<Monster*> monsterList;
-    Map* map;
 
 public:
-    MonsterManager(Map*);
+    MonsterManager();
     std::vector<Monster*> getMonsterList();
-    Map* getMap();
     void addMonster(Monster*);
     void changeStatusMonster();
 

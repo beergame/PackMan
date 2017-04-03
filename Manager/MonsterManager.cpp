@@ -1,9 +1,5 @@
 #include "MonsterManager.hh"
 
-Map *MonsterManager::getMap() {
-    return map;
-}
-
 std::vector<Monster *> MonsterManager::getMonsterList() {
     return monsterList;
 }
@@ -25,8 +21,7 @@ void MonsterManager::Notify(Packman *observable) {
     }
 }
 
-MonsterManager::MonsterManager(Map* map) {
-    this->map = map;
+MonsterManager::MonsterManager() {
     MonsterFactory* monsterFactory = new MonsterFactory();
     monsterFactory->CreateMonster(this);
 }
