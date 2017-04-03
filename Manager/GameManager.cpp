@@ -4,7 +4,7 @@ GameManager::GameManager() {
     MapFactory* mapFactory = new MapFactory();
     map = mapFactory->createMap();
     playerManager = new PlayerManager();
-    monsterManager = new MonsterManager(map);
+    monsterManager = new MonsterManager();
     playerManager->getPackman()->AddObserver(monsterManager);
 }
 
