@@ -8,8 +8,9 @@
 
 class Packman : public Character, IObservable{
 public:
-    Packman(IObserver*);
+    Packman();
     void Update(Map);
+    void AddObserver(IObserver*);
 };
 
 

@@ -24,3 +24,9 @@ void MonsterManager::Notify(Packman *observable) {
         changeStatusMonster();
     }
 }
+
+MonsterManager::MonsterManager(Map* map) {
+    this->map = map;
+    MonsterFactory* monsterFactory = new MonsterFactory();
+    monsterFactory->CreateMonster(this);
+}

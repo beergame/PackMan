@@ -2,15 +2,13 @@
 #define PACKMAN_MONSTERFACTORY_HH
 
 
-#include "../../Entities/Map.hh"
 #include "../../Entities/Monster.hh
+#include "../../Manager/MonsterManager.hh"
 
 class MonsterFactory {
 public:
-    MonsterFactory(Map*);
-
-private:
-    void CreateMonster(Map*);
+    MonsterFactory();
+    void CreateMonster(MonsterManager*);
 };
 
 

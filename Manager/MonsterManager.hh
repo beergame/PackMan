@@ -6,6 +6,7 @@
 #include "../Entities/Monster.hh"
 #include "../Utils/IObserver.hh"
 #include "../Entities/Packman.hh"
+#include "../Utils/Factory/MonsterFactory.hh"
 
 class MonsterManager : public IObserver{
 
@@ -14,6 +15,7 @@ private:
     Map* map;
 
 public:
+    MonsterManager(Map*);
     std::vector<Monster*> getMonsterList();
     Map* getMap();
     void addMonster(Monster*);

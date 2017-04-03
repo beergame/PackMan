@@ -8,8 +8,6 @@
 class MapFactory {
 public:
     MapFactory();
-
-private:
     Map* createMap();
 };
 

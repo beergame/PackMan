@@ -3,12 +3,11 @@
 /**
  * @TODO Temp coordinate, to change when the map is set up
  */
-Packman::Packman(IObserver* gameManager) {
+Packman::Packman() {
     setX(0);
     setY(0);
     setStatut(0);
     setTimePowerUpEaten();
-    AddObserver(gameManager);
 }
 
 void Packman::Update(Map map) {
@@ -71,4 +70,8 @@ void Packman::Update(Map map) {
             break;
     }
 
+}
+
+void Packman::AddObserver(IObserver *observer) {
+    observers.push_back(observer);
 }
