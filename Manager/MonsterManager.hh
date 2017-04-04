@@ -6,7 +6,8 @@
 #include "../Entities/Monster.hh"
 #include "../Utils/IObserver.hh"
 #include "../Entities/Packman.hh"
-#include "../Utils/Factory/MonsterFactory.hh"
+
+class MonsterFactory;
 
 class MonsterManager : public IObserver{
 
@@ -19,7 +20,7 @@ public:
     void addMonster(Monster*);
     void changeStatusMonster();
 
-    void Notify(Packman *observable);
+    void Notify(IObservable *observable);
 };
 
 

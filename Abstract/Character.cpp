@@ -53,3 +53,7 @@ double Character::getTimePowerUpEaten() {
 void Character::setTimePowerUpEaten() {
     timePowerUpEaten = TimeManager::GetInstance().GetElapsedTime() / 1000;
 }
+
+Character::~Character() {
+
+}

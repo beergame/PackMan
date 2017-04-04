@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <math.h>
-#include "Monster.hh"
 
 class Map {
 private:

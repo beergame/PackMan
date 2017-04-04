@@ -24,6 +24,5 @@ Map *MapFactory::createMap() {
     }
 
     Map* result = new Map(map);
-    new MonsterFactory(result);
     return result;
 }

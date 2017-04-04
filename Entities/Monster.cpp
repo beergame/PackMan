@@ -13,14 +13,14 @@ void Monster::Update(Map map) {
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
     double newY = 0;
     double newX = 0;
-    int element = nullptr;
+    int element = 3;
 
     double diff = time - Monster::getTimePowerUpEaten();
     if (diff > Monster::powerUpDuration) {
         setStatut(0);
     }
 
-    while (element == nullptr || element == 3) {
+    while (element == 3) {
         switch (direction) {
             case 1:
                 newX = getX();
@@ -54,6 +54,14 @@ void Monster::changeDirection() {
     srand (time(NULL));
     int dir = rand() % 4 + 1;
     setDirection(dir);
+}
+
+void Monster::Draw() {
+
+}
+
+Monster::~Monster() {
+
 }
 
 
