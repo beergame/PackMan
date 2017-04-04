@@ -5,6 +5,7 @@
 #include "PlayerManager.hh"
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
+#include <SFML/Graphics.hpp>
 
 class GameManager {
 private:
@@ -17,7 +18,6 @@ public:
     PlayerManager* getPlayerManager();
     MonsterManager* getMonsterManager();
     Map* getMap();
-
 };
 
 

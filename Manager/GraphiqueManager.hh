@@ -1,0 +1,11 @@
+
+#ifndef PACKMAN_GRAPHIQUEMANAGER_HH
+#define PACKMAN_GRAPHIQUEMANAGER_HH
+
+
+class GraphiqueManager {
+
+};
+
+
+#endif //PACKMAN_GRAPHIQUEMANAGER_HH
