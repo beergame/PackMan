@@ -2,8 +2,9 @@
 #define PACKMAN_MONSTERFACTORY_HH
 
 
-#include "../../Entities/Monster.hh
-#include "../../Manager/MonsterManager.hh"
+#include "../../Entities/Monster.hh"
+
+class MonsterManager;
 
 class MonsterFactory {
 public:

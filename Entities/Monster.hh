@@ -3,7 +3,6 @@
 
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
-#include "Map.hh"
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
@@ -11,8 +10,10 @@
 class Monster : public Character{
 public:
     Monster();
+    ~Monster();
     void Update(Map);
     void changeDirection();
+    void Draw();
 };
 
 

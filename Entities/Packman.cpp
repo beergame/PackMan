@@ -15,7 +15,6 @@ void Packman::Update(Map map) {
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
     double newX = 0;
     double newY = 0;
-    int element = nullptr;
 
     // Check if power-up expire
     double diff = time - Packman::getTimePowerUpEaten();
@@ -44,7 +43,7 @@ void Packman::Update(Map map) {
             break;
     };
 
-    element = map.checkMap(newX, newY);
+    int element = map.checkMap(newX, newY);
     switch (element) {
         case 0:
             setX(newX);
@@ -74,4 +73,16 @@ void Packman::Update(Map map) {
 
 void Packman::AddObserver(IObserver *observer) {
     observers.push_back(observer);
+}
+
+void Packman::Draw() {
+
+}
+
+Packman::~Packman() {
+
+}
+
+void Packman::RemoveObserver(IObserver *observer) {
+    observers.remove(observer);
 }
