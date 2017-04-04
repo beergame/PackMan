@@ -1,4 +1,5 @@
 #include "MonsterFactory.hh"
+#include "../../Manager/MonsterManager.hh"
 
 MonsterFactory::MonsterFactory() {
 }

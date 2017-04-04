@@ -1,4 +1,5 @@
 #include "MonsterManager.hh"
+#include "../Utils/Factory/MonsterFactory.hh"
 
 std::vector<Monster *> MonsterManager::getMonsterList() {
     return monsterList;
@@ -15,13 +16,9 @@ void MonsterManager::changeStatusMonster() {
     }
 }
 
-void MonsterManager::Notify(Packman *observable) {
-    if (observable->isStatut() == 1 ) {
-        changeStatusMonster();
-    }
+void MonsterManager::Notify(IObservable *observable) {
+    changeStatusMonster();
 }
 
 MonsterManager::MonsterManager() {
-    MonsterFactory* monsterFactory = new MonsterFactory();
-    monsterFactory->CreateMonster(this);
 }

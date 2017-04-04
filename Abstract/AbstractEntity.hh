@@ -8,7 +8,7 @@ class AbstractEntity {
 protected:
     AbstractEntity();
 public:
-    virtual ~AbstractEntity() = 0;
+    virtual ~AbstractEntity();
     virtual void Update(Map) = 0;
     virtual void Draw() = 0;
 };
