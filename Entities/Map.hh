@@ -6,12 +6,12 @@
 
 class Map {
 private:
-    std::vector<std::vector<int>> map;
+    std::vector<std::vector<int> > map;
 
 public:
     int checkMap(double, double);
-    Map(std::vector<std::vector<int>>);
-    std::vector<std::vector<int>> getMap();
+    Map(std::vector<std::vector<int> >);
+    std::vector<std::vector<int> > getMap();
     void cleanElement(double, double);
 };
 

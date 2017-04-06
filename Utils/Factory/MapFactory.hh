@@ -2,7 +2,6 @@
 #define PACKMAN_MAPFACTORY_HH
 
 #include "../../Entities/Map.hh"
-#include "MonsterFactory.hh"
 #include <vector>
 
 class MapFactory {
