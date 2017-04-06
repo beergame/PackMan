@@ -1,4 +1,5 @@
 #include "GameManager.hh"
+#include "../build/config.h"
 
 using namespace sf;
 
