@@ -18,11 +18,11 @@ int Map::checkMap(double X, double Y) {
     return map[PositionX][PositionY];
 }
 
-std::vector<std::vector<int>> Map::getMap() {
+std::vector<std::vector<int> > Map::getMap() {
     return map;
 }
 
-Map::Map(std::vector<std::vector<int>> map) {
+Map::Map(std::vector<std::vector<int> > map) {
     Map::map = map;
 }
 

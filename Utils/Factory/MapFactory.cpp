@@ -5,7 +5,7 @@ MapFactory::MapFactory() {
 }
 
 Map *MapFactory::createMap() {
-    std::vector<std::vector<int>> map;
+    std::vector<std::vector<int> > map;
     for (int i = 1; i < 21; i++) {
         for (int j = 1; j < 21; j++) {
             map[i][j] = 1;
