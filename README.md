@@ -10,7 +10,7 @@ Balssa Victor, Coulibaly Roland, Garreau-Férandin Simon
 You can name the directory build anything that you like
 ```shell
 mkdir build && cd build
-make ..
+cmake ..
 make
 ```
 
