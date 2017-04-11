@@ -3,8 +3,8 @@
 /**
  * @TODO Temp coordinate, to change when the map is set up
  */
-Packman::Packman(std::string sprites) {
-    Packman::setRessources(sprites);
+Packman::Packman(std::string ressources) {
+    Packman::setRessources(ressources);
     setX(0);
     setY(0);
     setStatut(0);
@@ -69,7 +69,6 @@ void Packman::Update(Map map) {
         default:
             break;
     }
-
 }
 
 void Packman::AddObserver(IObserver *observer) {
@@ -91,6 +90,6 @@ void Packman::Draw() {
     sf::Texture texture;
     texture.loadFromFile(this->getRessources());
 
-    sf::Sprite sprite(texture,sf::IntRect(0,0,12,14));
+    sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
     Packman::sprites = sprite;
 }
