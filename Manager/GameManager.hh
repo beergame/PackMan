@@ -19,6 +19,8 @@ public:
     MonsterManager* getMonsterManager();
     Map* getMap();
     void Draw();
+
+    void exec();
 };
 
 

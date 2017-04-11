@@ -30,10 +30,9 @@ void GameManager::Draw() {
     GameManager::getMonsterManager()->Draw();
 }
 
-int main(int argc, char* argv[]) {
+void GameManager::exec() {
     VideoMode videoMode(900,600);
     RenderWindow window(videoMode,"Packman");
-    GameManager gameManager;
 
     while (window.isOpen()) {
         window.clear();
@@ -45,12 +44,17 @@ int main(int argc, char* argv[]) {
                  ((event.type == Event::KeyPressed) && (event.key.code==Keyboard::Escape)) )
                 window.close();
             else {
-                gameManager.Draw();
+                GameManager::Draw();
                 window.clear();
-                window.draw(gameManager.getPlayerManager()->getPackman()->getSprites());
+                window.draw(GameManager::getPlayerManager()->getPackman()->getSprites());
                 window.display();
             }
         }
     }
+}
+
+int main(int argc, char* argv[]) {
+    GameManager gameManager;
+    gameManager.exec();
     return 0;
 }
