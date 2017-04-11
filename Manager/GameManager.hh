@@ -5,7 +5,6 @@
 #include "PlayerManager.hh"
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
-#include <SFML/Graphics.hpp>
 #include "../Utils/Factory/MonsterFactory.hh"
 
 class GameManager {
