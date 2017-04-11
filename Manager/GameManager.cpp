@@ -25,9 +25,15 @@ Map *GameManager::getMap() {
     return map;
 }
 
+void GameManager::Draw() {
+    GameManager::getPlayerManager()->getPackman()->Draw();
+    GameManager::getMonsterManager()->Draw();
+}
+
 int main(int argc, char* argv[]) {
-    VideoMode videoMode(320,240);
+    VideoMode videoMode(900,600);
     RenderWindow window(videoMode,"Packman");
+    GameManager *gameManager = new GameManager();
 
     while (window.isOpen()) {
         window.clear();
@@ -39,7 +45,10 @@ int main(int argc, char* argv[]) {
                  ((event.type == Event::KeyPressed) && (event.key.code==Keyboard::Escape)) )
                 window.close();
             else {
-
+                gameManager->Draw();
+                window.clear();
+                window.draw(gameManager->getPlayerManager()->getPackman()->getSprites());
+                window.display();
             }
         }
     }

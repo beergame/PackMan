@@ -2,6 +2,7 @@
 #define PACKMAN_CHARACTER_HH
 
 #include "AbstractEntity.hh"
+#include <string>
 
 class Character : public AbstractEntity{
 protected:
@@ -19,11 +20,15 @@ public:
     double getTimePowerUpEaten();
     void setTimePowerUpEaten();
     static constexpr double powerUpDuration = 1; //second
+    void setRessources(std::string);
+    std::string getRessources();
 private:
     double X, Y;
     bool statut;
     int direction;
     double timePowerUpEaten;
+    std::string ressources;
+
 };
 
 

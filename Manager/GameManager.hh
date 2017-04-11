@@ -19,6 +19,7 @@ public:
     PlayerManager* getPlayerManager();
     MonsterManager* getMonsterManager();
     Map* getMap();
+    void Draw();
 };
 
 

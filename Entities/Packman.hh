@@ -4,15 +4,19 @@
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
 #include "../Utils/IObservable.hh"
+#include <SFML/Graphics.hpp>
 
 class Packman : public Character, IObservable{
 public:
-    Packman();
+    Packman(std::string);
     ~Packman();
     void Update(Map);
     void AddObserver(IObserver*);
     void RemoveObserver(IObserver*);
     void Draw();
+    sf::Sprite getSprites();
+private:
+    sf::Sprite sprites;
 };
 
 

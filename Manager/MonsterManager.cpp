@@ -22,3 +22,9 @@ void MonsterManager::Notify(IObservable *observable) {
 
 MonsterManager::MonsterManager() {
 }
+
+void MonsterManager::Draw() {
+    for (auto monster : monsterList) {
+        monster->Draw();
+    }
+}

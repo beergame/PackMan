@@ -21,6 +21,8 @@ public:
     void changeStatusMonster();
 
     void Notify(IObservable *observable);
+
+    void Draw();
 };
 
 

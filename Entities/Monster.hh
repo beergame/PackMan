@@ -9,7 +9,7 @@
 
 class Monster : public Character{
 public:
-    Monster();
+    Monster(std::string);
     ~Monster();
     void Update(Map);
     void changeDirection();

@@ -1,6 +1,7 @@
 #include "Monster.hh"
 
-Monster::Monster() {
+Monster::Monster(std::string sprites) {
+    Monster::setRessources(sprites);
     setX(0);
     setY(0);
     setStatut(0);

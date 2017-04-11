@@ -57,3 +57,11 @@ void Character::setTimePowerUpEaten() {
 Character::~Character() {
 
 }
+
+void Character::setRessources(std::string sprites) {
+    Character::ressources = sprites;
+}
+
+std::string Character::getRessources() {
+    return Character::ressources;
+}
