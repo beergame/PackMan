@@ -7,10 +7,10 @@ GameManager::GameManager() {
     MapFactory* mapFactory = new MapFactory();
     MonsterFactory* monsterFactory = new MonsterFactory();
     map = mapFactory->createMap();
-    PlayerManager playerManager;
+    playerManager = new PlayerManager();
     monsterManager = new MonsterManager();
     monsterFactory->CreateMonster(monsterManager);
-    playerManager.getPackman()->AddObserver(monsterManager);
+    playerManager->getPackman()->AddObserver(monsterManager);
 }
 
 PlayerManager *GameManager::getPlayerManager() {
