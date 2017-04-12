@@ -13,9 +13,9 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 set(EXECUTABLE_NAME "PACKMAN")
 set(SOURCE_FILES
-        Abstract/AbstractEntity.cpp Abstract/Character.cpp Entities/Packman.cpp Entities/Monster.cpp Entities/Map.cpp Manager/PlayerManager.cpp Manager/MonsterManager.cpp Manager/GameManager.cpp Manager/GraphiqueManager.cpp Utils/IObservable.hh Utils/IObserver.hh Utils/TimeManager.cpp Utils/Factory/MonsterFactory.cpp Utils/Factory/MapFactory.cpp config.h.in)
+        Abstract/AbstractEntity.cpp Abstract/Character.cpp Entities/Packman.cpp Entities/Monster.cpp Entities/Map.cpp Manager/PlayerManager.cpp Manager/MonsterManager.cpp Manager/GameManager.cpp Utils/IObservable.hh Utils/IObserver.hh Utils/TimeManager.cpp Utils/Factory/MonsterFactory.cpp Utils/Factory/MapFactory.cpp config.h.in)
 
-add_executable(${EXECUTABLE_NAME} Abstract/AbstractEntity.cpp Abstract/Character.cpp Entities/Packman.cpp Entities/Monster.cpp Entities/Map.cpp Manager/PlayerManager.cpp Manager/MonsterManager.cpp Manager/GameManager.cpp Manager/GraphiqueManager.cpp Utils/IObservable.hh Utils/IObserver.hh Utils/TimeManager.cpp Utils/Factory/MonsterFactory.cpp Utils/Factory/MapFactory.cpp config.h.in)
+add_executable(${EXECUTABLE_NAME} Abstract/AbstractEntity.cpp Abstract/Character.cpp Entities/Packman.cpp Entities/Monster.cpp Entities/Map.cpp Manager/PlayerManager.cpp Manager/MonsterManager.cpp Manager/GameManager.cpp Utils/IObservable.hh Utils/IObserver.hh Utils/TimeManager.cpp Utils/Factory/MonsterFactory.cpp Utils/Factory/MapFactory.cpp config.h.in)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(SFML 1.6 REQUIRED system window graphics network audio)
