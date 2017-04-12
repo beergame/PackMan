@@ -12,7 +12,7 @@ Packman::Packman(std::string ressources) {
     setTimePowerUpEaten();
 }
 
-void Packman::Update(Map map) {
+void Packman::Update(Map *map) {
     int direction = getDirection();
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
     double newX = 0;
@@ -45,7 +45,7 @@ void Packman::Update(Map map) {
             break;
     };
 
-    int element = map.checkMap(newX, newY);
+    int element = map->checkMap(newX, newY);
     switch (element) {
         case 0:
             setX(newX);
@@ -54,12 +54,12 @@ void Packman::Update(Map map) {
         case 1:
             setX(newX);
             setY(newY);
-            map.cleanElement(newX, newY);
+            map->cleanElement(newX, newY);
             break;
         case 2:
             setX(newX);
             setY(newY);
-            map.cleanElement(newX, newY);
+            map->cleanElement(newX, newY);
             setTimePowerUpEaten();
             setStatut(1);
             for (auto &observer : observers) {

@@ -9,7 +9,7 @@ class Packman : public Character, IObservable{
 public:
     Packman(std::string);
     ~Packman();
-    void Update(Map);
+    void Update(Map*);
     void AddObserver(IObserver*);
     void RemoveObserver(IObserver*);
     void Draw(sf::RenderWindow*);

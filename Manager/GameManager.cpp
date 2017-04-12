@@ -26,9 +26,15 @@ Map *GameManager::getMap() {
 }
 
 void GameManager::Draw(RenderWindow *window) {
-    TimeManager::GetInstance().Update();
+    GameManager::Update();
     GameManager::getPlayerManager()->getPackman()->Draw(window);
     GameManager::getMonsterManager()->Draw(window);
+}
+
+void GameManager::Update(){
+    TimeManager::GetInstance().Update();
+    GameManager::getPlayerManager()->getPackman()->Update(this->getMap());
+    GameManager::getMonsterManager()->Update(this->getMap());
 }
 
 void GameManager::exec() {

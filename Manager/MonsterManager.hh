@@ -23,6 +23,8 @@ public:
     void Notify(IObservable *observable);
 
     void Draw(sf::RenderWindow*);
+
+    void Update(Map *map);
 };
 
 

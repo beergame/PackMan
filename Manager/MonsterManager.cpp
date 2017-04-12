@@ -28,3 +28,9 @@ void MonsterManager::Draw(sf::RenderWindow *window) {
         monster->Draw(window);
     }
 }
+
+void MonsterManager::Update(Map* map) {
+    for (auto monster: monsterList) {
+        monster->Update(map);
+    }
+}

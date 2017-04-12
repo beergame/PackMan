@@ -9,7 +9,7 @@ Monster::Monster(std::string sprites) {
     changeDirection();
 }
 
-void Monster::Update(Map map) {
+void Monster::Update(Map *map) {
     int direction = getDirection();
     double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
     double newY = 0;
@@ -42,7 +42,7 @@ void Monster::Update(Map map) {
             default:
                 break;
         };
-        element = map.checkMap(newX, newY);
+        element = map->checkMap(newX, newY);
         if (element == 3) {
             changeDirection();
         }

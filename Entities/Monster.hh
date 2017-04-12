@@ -11,7 +11,7 @@ class Monster : public Character{
 public:
     Monster(std::string);
     ~Monster();
-    void Update(Map);
+    void Update(Map*);
     void changeDirection();
     void Draw(sf::RenderWindow*);
 };

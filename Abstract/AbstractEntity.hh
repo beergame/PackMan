@@ -10,7 +10,7 @@ protected:
     AbstractEntity();
 public:
     virtual ~AbstractEntity();
-    virtual void Update(Map) = 0;
+    virtual void Update(Map*) = 0;
     virtual void Draw(sf::RenderWindow*) = 0;
 };
 
