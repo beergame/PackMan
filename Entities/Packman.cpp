@@ -5,8 +5,8 @@
  */
 Packman::Packman(std::string ressources) {
     Packman::setRessources(ressources);
-    setX(0);
-    setY(0);
+    setX(100);
+    setY(100);
     setStatut(0);
     setTimePowerUpEaten();
 }
@@ -87,5 +87,6 @@ void Packman::Draw(sf::RenderWindow *window) {
     texture.loadFromFile(this->getRessources());
 
     sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
+    sprite.setPosition((float)Packman::getX(), (float)Packman::getY());
     window->draw(sprite);
 }

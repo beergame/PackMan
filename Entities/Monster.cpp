@@ -61,7 +61,8 @@ void Monster::Draw(sf::RenderWindow *window) {
     sf::Texture texture;
     texture.loadFromFile(this->getRessources());
 
-    sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
+    sf::Sprite sprite(texture, sf::IntRect(0,0,16,18));
+    sprite.setPosition((float)Monster::getX(), (float)Monster::getY());
     window->draw(sprite);
 }
 
