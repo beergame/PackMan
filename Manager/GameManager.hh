@@ -18,7 +18,7 @@ public:
     PlayerManager* getPlayerManager();
     MonsterManager* getMonsterManager();
     Map* getMap();
-    void Draw();
+    void Draw(sf::RenderWindow*);
 
     void exec();
 };

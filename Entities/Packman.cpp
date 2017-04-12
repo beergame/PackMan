@@ -82,14 +82,10 @@ void Packman::RemoveObserver(IObserver *observer) {
     observers.remove(observer);
 }
 
-sf::Sprite Packman::getSprites() {
-    return Packman::sprites;
-}
-
-void Packman::Draw() {
+void Packman::Draw(sf::RenderWindow *window) {
     sf::Texture texture;
     texture.loadFromFile(this->getRessources());
 
     sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
-    Packman::sprites = sprite;
+    window->draw(sprite);
 }

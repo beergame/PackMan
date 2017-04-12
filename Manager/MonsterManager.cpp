@@ -23,8 +23,8 @@ void MonsterManager::Notify(IObservable *observable) {
 MonsterManager::MonsterManager() {
 }
 
-void MonsterManager::Draw() {
+void MonsterManager::Draw(sf::RenderWindow *window) {
     for (auto monster : monsterList) {
-        monster->Draw();
+        monster->Draw(window);
     }
 }

@@ -57,8 +57,12 @@ void Monster::changeDirection() {
     setDirection(dir);
 }
 
-void Monster::Draw() {
+void Monster::Draw(sf::RenderWindow *window) {
+    sf::Texture texture;
+    texture.loadFromFile(this->getRessources());
 
+    sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
+    window->draw(sprite);
 }
 
 Monster::~Monster() {

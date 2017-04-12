@@ -25,9 +25,9 @@ Map *GameManager::getMap() {
     return map;
 }
 
-void GameManager::Draw() {
-    GameManager::getPlayerManager()->getPackman()->Draw();
-    GameManager::getMonsterManager()->Draw();
+void GameManager::Draw(RenderWindow *window) {
+    GameManager::getPlayerManager()->getPackman()->Draw(window);
+    GameManager::getMonsterManager()->Draw(window);
 }
 
 void GameManager::exec() {
@@ -44,9 +44,8 @@ void GameManager::exec() {
                  ((event.type == Event::KeyPressed) && (event.key.code==Keyboard::Escape)) )
                 window.close();
             else {
-                GameManager::Draw();
                 window.clear();
-                window.draw(GameManager::getPlayerManager()->getPackman()->getSprites());
+                GameManager::Draw(&window);
                 window.display();
             }
         }

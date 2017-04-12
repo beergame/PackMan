@@ -22,7 +22,7 @@ public:
 
     void Notify(IObservable *observable);
 
-    void Draw();
+    void Draw(sf::RenderWindow*);
 };
 
 

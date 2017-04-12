@@ -13,7 +13,7 @@ public:
     ~Monster();
     void Update(Map);
     void changeDirection();
-    void Draw();
+    void Draw(sf::RenderWindow*);
 };
 
 
