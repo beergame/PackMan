@@ -58,10 +58,32 @@ void Monster::changeDirection() {
 }
 
 void Monster::Draw(sf::RenderWindow *window) {
+    int posX = 0;
     sf::Texture texture;
     texture.loadFromFile(this->getRessources());
 
-    sf::Sprite sprite(texture, sf::IntRect(0,0,16,18));
+    switch (Monster::getDirection()) {
+        case 1:
+            posX = 64;
+            break;
+        case 2:
+            posX = 0;
+            break;
+        case 3:
+            posX = 96;
+            break;
+        case 4:
+            posX = 32;
+            break;
+        default:
+            break;
+    }
+
+    if ((TimeManager::GetInstance().GetStartedTime() % 1000) > 500) {
+        posX += 16;
+    }
+
+    sf::Sprite sprite(texture, sf::IntRect(posX,0,16,18));
     sprite.setPosition((float)Monster::getX(), (float)Monster::getY());
     window->draw(sprite);
 }

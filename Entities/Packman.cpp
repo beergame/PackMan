@@ -8,6 +8,7 @@ Packman::Packman(std::string ressources) {
     setX(100);
     setY(100);
     setStatut(0);
+    setDirection(2);
     setTimePowerUpEaten();
 }
 
@@ -85,8 +86,31 @@ void Packman::RemoveObserver(IObserver *observer) {
 void Packman::Draw(sf::RenderWindow *window) {
     sf::Texture texture;
     texture.loadFromFile(this->getRessources());
+    int posX = 0;
+    int posY = 0;
 
-    sf::Sprite sprite(texture, sf::IntRect(0,0,13,16));
+    if ((TimeManager::GetInstance().GetStartedTime() % 1000) > 500) {
+        posX = 16;
+    }
+
+    switch (Packman::getDirection()) {
+        case 1:
+            posY = 32;
+            break;
+        case 2:
+            posY = 0;
+            break;
+        case 3:
+            posY = 48;
+            break;
+        case 4:
+            posY = 16;
+            break;
+        default:
+            break;
+    }
+
+    sf::Sprite sprite(texture, sf::IntRect(posX, posY, 16, 16));
     sprite.setPosition((float)Packman::getX(), (float)Packman::getY());
     window->draw(sprite);
 }
