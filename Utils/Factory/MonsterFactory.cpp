@@ -10,17 +10,17 @@ MonsterFactory::MonsterFactory() {
  */
 void MonsterFactory::CreateMonster(MonsterManager* monsterManager) {
     Monster *monster1 = new Monster("../Sprites/Red.png");
-    monster1->setX(0);
-    monster1->setY(0);
+    monster1->setX(1);
+    monster1->setY(1);
     Monster *monster2 = new Monster("../Sprites/Pink.png");
-    monster2->setX(0);
-    monster2->setY(100);
+    monster2->setX(1);
+    monster2->setY(20);
     Monster *monster3 = new Monster("../Sprites/Orange.png");
-    monster3->setX(100);
-    monster3->setY(0);
+    monster3->setX(20);
+    monster3->setY(1);
     Monster *monster4 = new Monster("../Sprites/Blue.png");
-    monster4->setX(200);
-    monster4->setY(200);
+    monster4->setX(20);
+    monster4->setY(20);
 
     monsterManager->addMonster(monster1);
     monsterManager->addMonster(monster2);
