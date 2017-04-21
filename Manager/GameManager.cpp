@@ -27,6 +27,13 @@ Map *GameManager::getMap() {
 
 void GameManager::Draw(RenderWindow *window) {
     GameManager::Update();
+    sf::Texture texture;
+    texture.loadFromFile("../Sprites/Map2.png");
+    sf::Sprite sprite(texture, sf::IntRect(0,0,226,246));
+    sprite.setScale(1.5, 1.5);
+    sprite.setPosition(50, 50);
+    window->draw(sprite);
+    GameManager::getMap()->Draw(window);
     GameManager::getPlayerManager()->getPackman()->Draw(window);
     GameManager::getMonsterManager()->Draw(window);
 }

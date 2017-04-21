@@ -8,6 +8,9 @@ class MapFactory {
 public:
     MapFactory();
     Map* createMap();
+
+private:
+    std::vector<std::vector<int>> setInternalWall(std::vector<std::vector<int>>);
 };
 
 

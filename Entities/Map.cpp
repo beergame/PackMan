@@ -32,3 +32,14 @@ void Map::cleanElement(double X, double Y) {
 
     map[PositionX][PositionY] = 0;
 }
+
+void Map::Draw(sf::RenderWindow *) {
+    for(auto& row:map){
+        for(auto& col:row){
+            if (col == 1)
+                dodo;
+            if (col == 2)
+                azeaze;
+        }
+    }
+}
