@@ -6,13 +6,15 @@
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
 #include "../Utils/Factory/MonsterFactory.hh"
+#include <string>
+#include <SFML/System.hpp>
 
 class GameManager {
 private:
     PlayerManager* playerManager;
     MonsterManager* monsterManager;
     Map* map;
-
+    void getFps(sf::RenderWindow*);
 public:
     GameManager();
     PlayerManager* getPlayerManager();

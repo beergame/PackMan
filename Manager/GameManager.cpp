@@ -26,7 +26,6 @@ Map *GameManager::getMap() {
 }
 
 void GameManager::Draw(RenderWindow *window) {
-    GameManager::Update();
     sf::Texture texture;
     texture.loadFromFile("../Sprites/Map.png");
     sf::Sprite sprite(texture, sf::IntRect(0,0,226,246));
@@ -52,8 +51,10 @@ void GameManager::exec() {
     while (window.isOpen()) {
         window.clear();
 
-
         Event event;
+        GameManager::Update();
+        GameManager::getFps(&window);
+
         while (window.pollEvent(event)) {
             if ( (event.type == Event::Closed) ||
                  ((event.type == Event::KeyPressed) && (event.key.code==Keyboard::Escape)) )
@@ -70,6 +71,17 @@ void GameManager::exec() {
         GameManager::Draw(&window);
         window.display();
     }
+}
+
+void GameManager::getFps(RenderWindow *window) {
+    int fps = 1000 / TimeManager::GetInstance().GetElapsedTime();
+    std::string fpsToString = std::to_string(fps) + " fps";
+    Font font;
+    font.loadFromFile("../blackWolf.ttf");
+    Text text(fpsToString, font, 10);
+    text.setPosition(0,0);
+
+    window->draw(text);
 }
 
 int main(int argc, char* argv[]) {
