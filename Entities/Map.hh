@@ -4,6 +4,7 @@
 #include <vector>
 #include <math.h>
 #include <SFML/Graphics.hpp>
+#include <iterator>
 
 class Map {
 private:
