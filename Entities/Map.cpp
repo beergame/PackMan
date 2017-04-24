@@ -34,21 +34,17 @@ void Map::cleanElement(double X, double Y) {
 }
 
 void Map::Draw(sf::RenderWindow *window) {
-    std::vector< std::vector<int> >::iterator row;
-    std::vector<int>::iterator col;
-
     sf::Texture texture;
-    for(row = map.begin(); row != map.end(); ++row){
-        for(col = row->begin(); col != row->end(); ++col){
-            if (*col == 1) {
+    for(int i = 0; i < map.size(); i++){
+        for(int j = 0; j < map[i].size(); j++){
+            if (map[i][j] == 1) {
                 texture.loadFromFile("../Sprites/Beer.png");
-            }
-            if (*col == 2) {
+            } else if (map[i][j] == 2) {
                 texture.loadFromFile("../Sprites/Beers.png");
             }
             sf::Sprite sprite(texture, sf::IntRect(0,0,120,120));
             sprite.setScale(1 / 15, 1 / 15);
-            sprite.setPosition(50 + (std::distance(map.begin(), row) * 8), 50 + (*col * 8));
+            sprite.setPosition(50 + (8 * i), 50 + (8 * j));
             window->draw(sprite);
         }
     }

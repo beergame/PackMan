@@ -1,7 +1,6 @@
 #include "MapFactory.hh"
 
 MapFactory::MapFactory() {
-    createMap();
 }
 
 Map *MapFactory::createMap() {
