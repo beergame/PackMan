@@ -4,9 +4,9 @@ MapFactory::MapFactory() {
 }
 
 Map *MapFactory::createMap() {
-    std::vector<std::vector<int>> map(28, std::vector<int>(31));
-    for (int i = 1; i < 28; i++) {
-        for (int j = 1; j < 31; j++) {
+    std::vector<std::vector<int>> map(31, std::vector<int>(28));
+    for (int i = 1; i < 31; i++) {
+        for (int j = 1; j < 28; j++) {
             map[i][j] = 1;
         }
     }
@@ -15,14 +15,14 @@ Map *MapFactory::createMap() {
     map[1][23] = 2;
     map[26][23] = 2;
 
-    for (int i = 0; i < 28; i++) {
+    for (int i = 0; i < 31; i++) {
         map[i][0] = 3;
-        map[i][30] = 3;
+        map[i][27] = 3;
     }
 
-    for (int j = 0; j < 31; j++) {
+    for (int j = 0; j < 28; j++) {
         map[0][j] = 3;
-        map[27][j] = 3;
+        map[30][j] = 3;
     }
 
     map = setInternalWall(map);
@@ -104,6 +104,88 @@ std::vector<std::vector<int>> MapFactory::setInternalWall(std::vector<std::vecto
         }
     }
 
+    for (int i = 15; i < 20; i++) {
+        for (int j = 7; j < 9; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 19;j < 21; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 18; i < 20; i++) {
+        for (int j = 10; j < 18; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 20; i < 23; i++) {
+        for (int j = 13; j < 15; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 21; i < 23; i++) {
+        for (int j = 2; j < 6; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 7; j < 12; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 16; j < 21; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 22; j < 26; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 23; i < 26; i++) {
+        for (int j = 4; j < 6; j++) {
+            map[i][j] = 3;
+        }
+
+        for (int j = 22; j < 24; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 24; i < 26; i++) {
+        for (int j = 1; j < 3; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 10; j < 18; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 26; j < 28; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 24; i < 27; i++) {
+        for (int j = 7; j < 9; j++) {
+            map[i][j] = 3;
+        }
+
+        for (int j = 18; j < 21; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 26; i < 29; i++) {
+        for (int j = 13; j < 15; j++) {
+            map[i][j] = 3;
+        }
+    }
+
+    for (int i = 27; i < 29; i++) {
+        for (int j = 2; j < 12; j++) {
+            map[i][j] = 3;
+        }
+        for (int j = 16; j < 26; j++) {
+            map[i][j] = 3;
+        }
+    }
 
     return map;
 }
