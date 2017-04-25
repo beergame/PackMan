@@ -32,15 +32,15 @@ void GameManager::Draw(RenderWindow *window) {
     sprite.setScale(1.5, 1.5);
     sprite.setPosition(50, 50);
     window->draw(sprite);
-    GameManager::getMap()->Draw(window);
-    GameManager::getPlayerManager()->getPackman()->Draw(window);
-    GameManager::getMonsterManager()->Draw(window);
+    this->getMap()->Draw(window);
+    this->getPlayerManager()->getPackman()->Draw(window);
+    this->getMonsterManager()->Draw(window);
 }
 
 void GameManager::Update(){
     TimeManager::GetInstance().Update();
-    GameManager::getPlayerManager()->getPackman()->Update(this->getMap());
-    GameManager::getMonsterManager()->Update(this->getMap());
+    this->getPlayerManager()->getPackman()->Update(this->getMap());
+    this->getMonsterManager()->Update(this->getMap());
 }
 
 void GameManager::exec() {
@@ -52,8 +52,8 @@ void GameManager::exec() {
         window.clear();
 
         Event event;
-        GameManager::Update();
-        GameManager::getFps(&window);
+        this->Update();
+        this->getFps(&window);
 
         while (window.pollEvent(event)) {
             if ( (event.type == Event::Closed) ||
@@ -68,7 +68,7 @@ void GameManager::exec() {
             else if (event.type == Event::KeyPressed && (event.key.code == Keyboard::Q) || (event.key.code == Keyboard::Left))
                 this->getPlayerManager()->getPackman()->setDirection(4);
         }
-        GameManager::Draw(&window);
+        this->Draw(&window);
         window.display();
     }
 }
@@ -78,7 +78,7 @@ void GameManager::getFps(RenderWindow *window) {
     std::string fpsToString = std::to_string(fps) + " fps";
     Font font;
     font.loadFromFile("../blackWolf.ttf");
-    Text text(fpsToString, font, 10);
+    Text text(fpsToString, font, 20);
     text.setPosition(0,0);
 
     window->draw(text);
