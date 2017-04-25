@@ -14,7 +14,8 @@ Packman::Packman(std::string ressources) {
 
 void Packman::Update(Map *map) {
     int direction = getDirection();
-    double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
+    double time = TimeManager::GetInstance().GetElapsedTime();
+    double timeInSecond = time / 1000;
     double newX = 0;
     double newY = 0;
 
@@ -27,18 +28,18 @@ void Packman::Update(Map *map) {
     switch (direction) {
         case 1:
             newX = getX();
-            newY = getY() + time;
+            newY = getY() - (timeInSecond * 3);
             break;
         case 2:
-            newX = getX() + time;
+            newX = getX() + (timeInSecond * 3);
             newY = getY();
             break;
         case 3:
             newX = getX();
-            newY = getY() - time;
+            newY = getY() + (timeInSecond * 3);
             break;
         case 4:
-            newX = getX() - time;
+            newX = getX() - (timeInSecond * 3);
             newY = getY();
             break;
         default:
