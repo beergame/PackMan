@@ -32,7 +32,7 @@ void GameManager::Draw(RenderWindow *window) {
     sprite.setScale(1.5, 1.5);
     sprite.setPosition(50, 50);
     window->draw(sprite);
-    this->getMap()->Draw(window);
+    //this->getMap()->Draw(window);
     this->getPlayerManager()->getPackman()->Draw(window);
     this->getMonsterManager()->Draw(window);
 }
@@ -47,6 +47,7 @@ void GameManager::exec() {
     VideoMode videoMode(900,600);
     RenderWindow window(videoMode,"Packman");
     TimeManager::GetInstance().Start();
+    window.setFramerateLimit(60);
 
     while (window.isOpen()) {
         window.clear();
