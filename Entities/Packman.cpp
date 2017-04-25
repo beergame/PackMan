@@ -5,8 +5,8 @@
  */
 Packman::Packman(std::string ressources) {
     Packman::setRessources(ressources);
-    setX(1);
-    setY(1);
+    setX(29);
+    setY(15);
     setStatut(0);
     setDirection(2);
     setTimePowerUpEaten();

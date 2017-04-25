@@ -11,7 +11,8 @@ Monster::Monster(std::string sprites) {
 
 void Monster::Update(Map *map) {
     int direction = getDirection();
-    double time = TimeManager::GetInstance().GetElapsedTime() / 1000;
+    double time = TimeManager::GetInstance().GetElapsedTime();
+    double timeInSecond = time / 1000;
     double newY = 0;
     double newX = 0;
     int element = 3;
@@ -25,18 +26,18 @@ void Monster::Update(Map *map) {
         switch (direction) {
             case 1:
                 newX = getX();
-                newY = getY() + time;
+                newY = getY() - (timeInSecond * 3);
                 break;
             case 2:
-                newX = getX() + time;
+                newX = getX() + (timeInSecond * 3);
                 newY = getY();
                 break;
             case 3:
                 newX = getX();
-                newY = getY() - time;
+                newY = getY() + (timeInSecond * 3);
                 break;
             case 4:
-                newX = getX() - time;
+                newX = getX() - (timeInSecond * 3);
                 newY = getY();
                 break;
             default:
@@ -84,7 +85,7 @@ void Monster::Draw(sf::RenderWindow *window) {
     }
 
     sf::Sprite sprite(texture, sf::IntRect(posX,0,16,16));
-    sprite.setPosition(((float)Monster::getX() * 16) + 50, ((float)Monster::getY() * 16) + 50);
+    sprite.setPosition(((float)Monster::getX() * 8) + 50, ((float)Monster::getY() * 8) + 50);
     window->draw(sprite);
 }
 
