@@ -95,8 +95,8 @@ void Monster::navigateTheMaze(Map* map, double time) {
     if (element == 3) {
         changeDirection(direction);
         navigateTheMaze(map, time);
+    } else {
+        setX(newX);
+        setY(newY);
     }
-
-    setX(newX);
-    setY(newY);
 }
