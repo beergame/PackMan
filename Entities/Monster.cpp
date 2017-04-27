@@ -2,60 +2,27 @@
 
 Monster::Monster(std::string sprites) {
     Monster::setRessources(sprites);
-    setX(0);
-    setY(0);
     setStatut(0);
     setTimePowerUpEaten();
-    changeDirection();
+    changeDirection(9);
 }
 
 void Monster::Update(Map *map) {
-    int direction = getDirection();
     double time = TimeManager::GetInstance().GetElapsedTime();
-    double timeInSecond = time / 1000;
-    double newY = 0;
-    double newX = 0;
-    int element = 3;
+
+    navigateTheMaze(map, time);
 
     double diff = time - Monster::getTimePowerUpEaten();
     if (diff > Monster::powerUpDuration) {
         setStatut(0);
     }
-
-    while (element == 3) {
-        switch (direction) {
-            case 1:
-                newX = getX();
-                newY = getY() - (timeInSecond * 3);
-                break;
-            case 2:
-                newX = getX() + (timeInSecond * 3);
-                newY = getY();
-                break;
-            case 3:
-                newX = getX();
-                newY = getY() + (timeInSecond * 3);
-                break;
-            case 4:
-                newX = getX() - (timeInSecond * 3);
-                newY = getY();
-                break;
-            default:
-                break;
-        };
-        element = map->checkMap(newX, newY);
-        if (element == 3) {
-            changeDirection();
-        }
-    }
-    setX(newX);
-    setY(newY);
 }
 
-void Monster::changeDirection() {
-    srand (time(NULL));
-    int dir = rand() % 4 + 1;
-    setDirection(dir);
+void Monster::changeDirection(int direction) {
+    if ((direction + 1) > 4)
+        setDirection(1);
+    else
+        setDirection(direction + 1);
 }
 
 void Monster::Draw(sf::RenderWindow *window) {
@@ -94,4 +61,42 @@ Monster::~Monster() {
 
 }
 
+void Monster::navigateTheMaze(Map* map, double time) {
+    int direction = getDirection();
+    double timeInSecond = time / 1000;
+    double newY = 0;
+    double newX = 0;
 
+    switch (direction) {
+        case 1:
+            newX = getX();
+            newY = getY() - (timeInSecond * 3);
+            break;
+        case 2:
+            newX = getX() + (timeInSecond * 3);
+            newY = getY();
+            break;
+        case 3:
+            newX = getX();
+            newY = getY() + (timeInSecond * 3);
+            break;
+        case 4:
+            newX = getX() - (timeInSecond * 3);
+            newY = getY();
+            break;
+        default:
+            break;
+    };
+
+    newX = checkX(newX);
+    newY = checkY(newY);
+    int element = map->checkMap(newX, newY);
+
+    if (element == 3) {
+        changeDirection(direction);
+        navigateTheMaze(map, time);
+    }
+
+    setX(newX);
+    setY(newY);
+}
