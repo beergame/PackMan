@@ -22,6 +22,8 @@ public:
     static constexpr double powerUpDuration = 1; //second
     void setRessources(std::string);
     std::string getRessources();
+    double checkX(double);
+    double checkY(double);
 private:
     double X, Y;
     bool statut;

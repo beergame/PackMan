@@ -12,8 +12,10 @@ public:
     Monster(std::string);
     ~Monster();
     void Update(Map*);
-    void changeDirection();
+    void changeDirection(int);
     void Draw(sf::RenderWindow*);
+private:
+    void navigateTheMaze(Map*, double);
 };
 
 

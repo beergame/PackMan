@@ -65,3 +65,15 @@ void Character::setRessources(std::string sprites) {
 std::string Character::getRessources() {
     return Character::ressources;
 }
+
+double Character::checkX(double X) {
+    if (X >= 30)
+        return 30;
+    return X;
+}
+
+double Character::checkY(double Y) {
+    if (Y >= 27)
+        return 27;
+    return Y;
+}

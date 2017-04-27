@@ -28,24 +28,26 @@ void Packman::Update(Map *map) {
     switch (direction) {
         case 1:
             newX = getX();
-            newY = getY() - (timeInSecond * 3);
+            newY = getY() - (timeInSecond * 10);
             break;
         case 2:
-            newX = getX() + (timeInSecond * 3);
+            newX = getX() + (timeInSecond * 10);
             newY = getY();
             break;
         case 3:
             newX = getX();
-            newY = getY() + (timeInSecond * 3);
+            newY = getY() + (timeInSecond * 10);
             break;
         case 4:
-            newX = getX() - (timeInSecond * 3);
+            newX = getX() - (timeInSecond * 10);
             newY = getY();
             break;
         default:
             break;
     };
 
+    newX = checkX(newX);
+    newY = checkY(newY);
     int element = map->checkMap(newX, newY);
     switch (element) {
         case 0:
