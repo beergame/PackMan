@@ -6,13 +6,14 @@
 Packman::Packman(std::string ressources) {
     Packman::setRessources(ressources);
     setX(26);
-    setY(15);
+    setY(26);
     setStatut(0);
     setDirection(2);
     setTimePowerUpEaten();
 }
 
 void Packman::Update(Map *map) {
+
     int direction = getDirection();
     double time = TimeManager::GetInstance().GetElapsedTime();
     double timeInSecond = time / 1000;

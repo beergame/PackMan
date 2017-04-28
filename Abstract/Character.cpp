@@ -67,13 +67,13 @@ std::string Character::getRessources() {
 }
 
 double Character::checkX(double X) {
-    if (X >= 30)
-        return 30;
+    if (X >= 27)
+        return 27;
     return X;
 }
 
 double Character::checkY(double Y) {
-    if (Y >= 27)
-        return 27;
+    if (Y >= 30)
+        return 30;
     return Y;
 }
