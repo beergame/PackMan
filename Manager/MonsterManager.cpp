@@ -2,35 +2,35 @@
 #include "../Utils/Factory/MonsterFactory.hh"
 
 std::vector<Monster *> MonsterManager::getMonsterList() {
-    return monsterList;
+	return monsterList;
 }
 
-void MonsterManager::addMonster(Monster* monster) {
-    monsterList.push_back(monster);
+void MonsterManager::addMonster(Monster *monster) {
+	monsterList.push_back(monster);
 }
 
 void MonsterManager::changeStatusMonster() {
-    for (auto monster : monsterList) {
-        monster->setTimePowerUpEaten();
-        monster->setStatut(1);
-    }
+	for (auto monster : monsterList) {
+		monster->setTimePowerUpEaten();
+		monster->setStatut(1);
+	}
 }
 
 void MonsterManager::Notify(IObservable *observable) {
-    changeStatusMonster();
+	changeStatusMonster();
 }
 
 MonsterManager::MonsterManager() {
 }
 
 void MonsterManager::Draw(sf::RenderWindow *window) {
-    for (auto monster : monsterList) {
-        monster->Draw(window);
-    }
+	for (auto monster : monsterList) {
+		monster->Draw(window);
+	}
 }
 
-void MonsterManager::Update(Map* map) {
-    for (auto monster: monsterList) {
-        monster->Update(map);
-    }
+void MonsterManager::Update(Map *map) {
+	for (auto monster: monsterList) {
+		monster->Update(map);
+	}
 }
