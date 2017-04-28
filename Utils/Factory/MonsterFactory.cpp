@@ -14,13 +14,13 @@ void MonsterFactory::CreateMonster(MonsterManager* monsterManager) {
     monster1->setY(1);
     Monster *monster2 = new Monster("../Sprites/Pink.png");
     monster2->setX(1);
-    monster2->setY(25);
+    monster2->setY(29);
     Monster *monster3 = new Monster("../Sprites/Orange.png");
-    monster3->setX(29);
+    monster3->setX(26);
     monster3->setY(1);
     Monster *monster4 = new Monster("../Sprites/Blue.png");
-    monster4->setX(29);
-    monster4->setY(25);
+    monster4->setX(26);
+    monster4->setY(29);
 
     monsterManager->addMonster(monster1);
     monsterManager->addMonster(monster2);
