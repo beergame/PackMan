@@ -7,15 +7,21 @@
 #include <time.h>
 #include <stdio.h>
 
-class Monster : public Character{
+class Monster : public Character
+{
 public:
-    Monster(std::string);
-    ~Monster();
-    void Update(Map*);
-    void changeDirection(int);
-    void Draw(sf::RenderWindow*);
+	Monster(std::string);
+
+	~Monster();
+
+	void Update(Map *);
+
+	void changeDirection(Map *);
+
+	void Draw(sf::RenderWindow *);
+
 private:
-    void navigateTheMaze(Map*, double);
+	void navigateTheMaze(Map *, double);
 };
 
 

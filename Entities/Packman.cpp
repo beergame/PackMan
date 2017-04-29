@@ -3,7 +3,8 @@
 /**
  * @TODO Temp coordinate, to change when the map is set up
  */
-Packman::Packman(std::string ressources) {
+Packman::Packman(std::string ressources)
+{
 	Packman::setRessources(ressources);
 	setX(26);
 	setY(26);
@@ -12,7 +13,10 @@ Packman::Packman(std::string ressources) {
 	setTimePowerUpEaten();
 }
 
-void Packman::Update(Map *map) {
+Packman::~Packman() {}
+
+void Packman::Update(Map *map)
+{
 
 	int direction = getDirection();
 	double time = TimeManager::GetInstance().GetElapsedTime();
@@ -77,20 +81,23 @@ void Packman::Update(Map *map) {
 	}
 }
 
-void Packman::AddObserver(IObserver *observer) {
+void Packman::AddObserver(IObserver *observer)
+{
 	observers.push_back(observer);
 }
 
-Packman::~Packman() {
-}
-
-void Packman::RemoveObserver(IObserver *observer) {
+void Packman::RemoveObserver(IObserver *observer)
+{
 	observers.remove(observer);
 }
 
-void Packman::Draw(sf::RenderWindow *window) {
+void Packman::Draw(sf::RenderWindow *window)
+{
+	sf::Image image;
 	sf::Texture texture;
-	texture.loadFromFile(this->getRessources());
+	image.loadFromFile(this->getRessources());
+	image.createMaskFromColor(sf::Color::Black);
+	texture.loadFromImage(image);
 	int posX = 0;
 	int posY = 0;
 

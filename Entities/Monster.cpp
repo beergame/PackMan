@@ -1,34 +1,33 @@
 #include "Monster.hh"
 
-Monster::Monster(std::string sprites) {
+Monster::Monster(std::string sprites)
+{
 	Monster::setRessources(sprites);
 	setStatut(0);
 	setTimePowerUpEaten();
-	changeDirection(9);
 }
 
-void Monster::Update(Map *map) {
+Monster::~Monster() {}
+
+void Monster::Update(Map *map)
+{
 	double time = TimeManager::GetInstance().GetElapsedTime();
+	double diff = time - Monster::getTimePowerUpEaten();
 
 	navigateTheMaze(map, time);
-
-	double diff = time - Monster::getTimePowerUpEaten();
 	if (diff > Monster::powerUpDuration) {
 		setStatut(0);
 	}
 }
 
-void Monster::changeDirection(int direction) {
-	if ((direction + 1) > 4)
-		setDirection(1);
-	else
-		setDirection(direction + 1);
-}
-
-void Monster::Draw(sf::RenderWindow *window) {
+void Monster::Draw(sf::RenderWindow *window)
+{
 	int posX = 0;
+	sf::Image image;
 	sf::Texture texture;
-	texture.loadFromFile(this->getRessources());
+	image.loadFromFile(this->getRessources());
+	image.createMaskFromColor(sf::Color::Black);
+	texture.loadFromImage(image);
 
 	switch (Monster::getDirection()) {
 		case 1:
@@ -58,11 +57,41 @@ void Monster::Draw(sf::RenderWindow *window) {
 	window->draw(sprite);
 }
 
-Monster::~Monster() {
+void Monster::changeDirection(Map *map)
+{
+	double newX = 0, newY = 0;
 
+	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
+		if ((getDirection() + 1) > 4) {
+			setDirection(1);
+		} else {
+			setDirection(getDirection() + 1);
+		}
+		switch (getDirection()) {
+			case 1:
+				newX = getX();
+				newY = getY() - 1;
+				break;
+			case 2:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			case 3:
+				newX = getX();
+				newY = getY() + 1;
+				break;
+			case 4:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			default:
+				break;
+		}
+	}
 }
 
-void Monster::navigateTheMaze(Map *map, double time) {
+void Monster::navigateTheMaze(Map *map, double time)
+{
 	int direction = getDirection();
 	double timeInSecond = time / 1000;
 	double newY = 0;
@@ -94,7 +123,7 @@ void Monster::navigateTheMaze(Map *map, double time) {
 	int element = map->checkMap(newX, newY);
 
 	if (element == 3) {
-		changeDirection(direction);
+		changeDirection(map);
 	} else {
 		setX(newX);
 		setY(newY);

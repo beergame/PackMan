@@ -9,22 +9,26 @@
 
 class MonsterFactory;
 
-class MonsterManager : public IObserver{
+class MonsterManager : public IObserver
+{
 
 private:
-    std::vector<Monster*> monsterList;
+	std::vector<Monster *> monsterList;
 
 public:
-    MonsterManager();
-    std::vector<Monster*> getMonsterList();
-    void addMonster(Monster*);
-    void changeStatusMonster();
+	MonsterManager();
 
-    void Notify(IObservable *observable);
+	std::vector<Monster *> getMonsterList();
 
-    void Draw(sf::RenderWindow*);
+	void addMonster(Monster *);
 
-    void Update(Map *map);
+	void changeStatusMonster();
+
+	void Notify(IObservable *observable);
+
+	void Draw(sf::RenderWindow *);
+
+	void Update(Map *map);
 };
 
 
