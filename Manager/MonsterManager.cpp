@@ -1,9 +1,23 @@
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MonsterFactory.hh"
 
+MonsterManager::MonsterManager() {}
+
 std::vector<Monster *> MonsterManager::getMonsterList()
 {
-	return monsterList;
+	return (monsterList);
+}
+
+void MonsterManager::isPackmanVersusMonster(Packman *p)
+{
+	for (auto monster : getMonsterList()) {
+		if (round(p->getX()) == round(monster->getX()) &&
+			round(p->getY()) == round(monster->getY())) {
+			for (auto &observer : observers) {
+				observer->Notify(monster);
+			}
+		}
+	}
 }
 
 void MonsterManager::addMonster(Monster *monster)
@@ -15,17 +29,13 @@ void MonsterManager::changeStatusMonster()
 {
 	for (auto monster : monsterList) {
 		monster->setTimePowerUpEaten();
-		monster->setStatut(1);
+		monster->setStatus(1);
 	}
 }
 
 void MonsterManager::Notify(IObservable *observable)
 {
 	changeStatusMonster();
-}
-
-MonsterManager::MonsterManager()
-{
 }
 
 void MonsterManager::Draw(sf::RenderWindow *window)
@@ -40,4 +50,14 @@ void MonsterManager::Update(Map *map)
 	for (auto monster: monsterList) {
 		monster->Update(map);
 	}
+}
+
+void MonsterManager::AddObserver(IObserver *observer)
+{
+	observers.push_back(observer);
+}
+
+void MonsterManager::RemoveObserver(IObserver *observer)
+{
+	observers.remove(observer);
 }

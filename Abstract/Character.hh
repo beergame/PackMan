@@ -20,9 +20,9 @@ public:
 
 	void setY(double Y);
 
-	bool isStatut() const;
+	bool isStatus() const;
 
-	void setStatut(bool statut);
+	void setStatus(bool status);
 
 	int getDirection() const;
 
@@ -32,10 +32,10 @@ public:
 
 	void setTimePowerUpEaten();
 
-	static constexpr double powerUpDuration = 30; //second
-	void setRessources(std::string);
+	static constexpr double powerUpDuration = 15; //second
+	void setResources(std::string);
 
-	std::string getRessources();
+	std::string getResources();
 
 	double checkX(double);
 
@@ -43,10 +43,10 @@ public:
 
 private:
 	double X, Y;
-	bool statut;
+	bool status;
 	int direction;
 	double timePowerUpEaten;
-	std::string ressources;
+	std::string resources;
 
 };
 

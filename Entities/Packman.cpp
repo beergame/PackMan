@@ -1,19 +1,22 @@
 #include "Packman.hh"
+//#include "../Manager/MonsterManager.hh"
 
 /**
  * @TODO Temp coordinate, to change when the map is set up
  */
-Packman::Packman(std::string ressources)
+Packman::Packman(std::string resources)
 {
-	Packman::setRessources(ressources);
+	Packman::setResources(resources);
+	setLife(1);
 	setX(26);
 	setY(26);
-	setStatut(0);
-	setDirection(2);
+	setStatus(0);
+	setDirection(1);
 	setTimePowerUpEaten();
 }
 
-Packman::~Packman() {}
+Packman::~Packman()
+{}
 
 void Packman::Update(Map *map)
 {
@@ -27,7 +30,7 @@ void Packman::Update(Map *map)
 	// Check if power-up expire
 	double diff = time - Packman::getTimePowerUpEaten();
 	if (diff > Packman::powerUpDuration) {
-		setStatut(0);
+		setStatus(0);
 	}
 
 	switch (direction) {
@@ -55,6 +58,7 @@ void Packman::Update(Map *map)
 	newY = checkY(newY);
 
 	int element = map->checkMap(newX, newY);
+
 	switch (element) {
 		case 0:
 			setX(newX);
@@ -70,7 +74,7 @@ void Packman::Update(Map *map)
 			setY(newY);
 			map->cleanElement(newX, newY);
 			setTimePowerUpEaten();
-			setStatut(1);
+			setStatus(1);
 			for (auto &observer : observers) {
 				observer->Notify(this);
 			}
@@ -78,6 +82,18 @@ void Packman::Update(Map *map)
 		case 3:
 		default:
 			break;
+	}
+}
+
+void Packman::Notify(IObservable *monster)
+{
+	if (isStatus()) {
+		monster->setTimePowerUpEaten();
+		monster->setX(10);
+		monster->setY(10);
+		monster->setDirection(1);
+	} else {
+		setLife(0);
 	}
 }
 
@@ -95,7 +111,7 @@ void Packman::Draw(sf::RenderWindow *window)
 {
 	sf::Image image;
 	sf::Texture texture;
-	image.loadFromFile(this->getRessources());
+	image.loadFromFile(getResources());
 	image.createMaskFromColor(sf::Color::Black);
 	texture.loadFromImage(image);
 	int posX = 0;
@@ -126,4 +142,14 @@ void Packman::Draw(sf::RenderWindow *window)
 	sprite.setPosition(((float) Packman::getX() * 16) + 50, ((float) Packman::getY() * 16) + 50);
 	sprite.setScale(1.5, 1.5);
 	window->draw(sprite);
+}
+
+void Packman::setLife(unsigned int i)
+{
+	life = i;
+}
+
+int Packman::getLife()
+{
+	return life;
 }

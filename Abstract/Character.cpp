@@ -20,12 +20,12 @@ void Character::setY(double Y) {
     Character::Y = Y;
 }
 
-bool Character::isStatut() const {
-    return statut;
+bool Character::isStatus() const {
+    return status;
 }
 
-void Character::setStatut(bool statut) {
-    Character::statut = statut;
+void Character::setStatus(bool status) {
+    Character::status = status;
 }
 
 /*
@@ -58,12 +58,12 @@ Character::~Character() {
 
 }
 
-void Character::setRessources(std::string sprites) {
-    Character::ressources = sprites;
+void Character::setResources(std::string sprites) {
+    Character::resources = sprites;
 }
 
-std::string Character::getRessources() {
-    return Character::ressources;
+std::string Character::getResources() {
+    return Character::resources;
 }
 
 double Character::checkX(double X) {

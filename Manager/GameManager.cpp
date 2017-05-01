@@ -1,5 +1,5 @@
 #include "GameManager.hh"
-#include "../build/config.h"
+//#include "../build/config.h"
 
 using namespace sf;
 
@@ -12,6 +12,7 @@ GameManager::GameManager()
 	monsterManager = new MonsterManager();
 	monsterFactory->CreateMonster(monsterManager);
 	playerManager->getPackman()->AddObserver(monsterManager);
+	monsterManager->AddObserver(playerManager->getPackman());
 	font.loadFromFile("../blackWolf.ttf");
 }
 
@@ -43,23 +44,13 @@ void GameManager::Draw(RenderWindow *window)
 	this->getMonsterManager()->Draw(window);
 }
 
-void GameManager::isPackmanDead(Packman *player)
-{
-	for (auto monster : this->monsterManager->getMonsterList()) {
-		if (round(player->getX()) == round(monster->getX()) &&
-			round(player->getY()) == round(monster->getY())) {
-			/* set life to 0, stop game */
-			player->setStatut(1);
-		}
-	}
-}
-
 void GameManager::Update()
 {
 	TimeManager::GetInstance().Update();
 	this->getPlayerManager()->getPackman()->Update(this->getMap());
 	this->getMonsterManager()->Update(this->getMap());
-	this->isPackmanDead(this->getPlayerManager()->getPackman());
+	this->getMonsterManager()
+			->isPackmanVersusMonster(getPlayerManager()->getPackman());
 }
 
 void GameManager::exec()
@@ -76,8 +67,8 @@ void GameManager::exec()
 		this->Update();
 		this->getFps(&window);
 		/* draw game info */
-		if (this->getPlayerManager()->getPackman()->isStatut()) {
-			drawString(&window, "mode ouf");
+		if (this->getPlayerManager()->getPackman()->isStatus()) {
+			drawString(&window, "Packman power up !!");
 		}
 
 		while (window.pollEvent(event)) {
@@ -91,11 +82,11 @@ void GameManager::exec()
 			} else if (event.type == Event::KeyPressed &&
 					   (event.key.code == Keyboard::D || event.key.code == Keyboard::Right)) {
 				this->getPlayerManager()->getPackman()->setDirection(2);
-			} else if (event.type == Event::KeyPressed && (event.key.code == Keyboard::S) ||
-					   (event.key.code == Keyboard::Down)) {
+			} else if (event.type == Event::KeyPressed &&
+					   (event.key.code == Keyboard::S || event.key.code == Keyboard::Down)) {
 				this->getPlayerManager()->getPackman()->setDirection(3);
-			} else if (event.type == Event::KeyPressed && (event.key.code == Keyboard::Q) ||
-					   (event.key.code == Keyboard::Left)) {
+			} else if (event.type == Event::KeyPressed &&
+					   (event.key.code == Keyboard::Q || event.key.code == Keyboard::Left)) {
 				this->getPlayerManager()->getPackman()->setDirection(4);
 			}
 		}
@@ -106,8 +97,9 @@ void GameManager::exec()
 
 void GameManager::getFps(RenderWindow *window)
 {
-//	int fps = 1000 / TimeManager::GetInstance().GetElapsedTime();
-	std::string fpsToString = std::to_string(60) + " fps";
+	int fps = (TimeManager::GetInstance().GetElapsedTime()) ?
+	1000 / TimeManager::GetInstance().GetElapsedTime() : 0;
+	std::string fpsToString = std::to_string(fps) + " fps";
 	Text text(fpsToString, font, 20);
 	text.setPosition(0, 0);
 	window->draw(text);
@@ -120,7 +112,7 @@ void GameManager::drawString(RenderWindow *window, std::string str)
 	window->draw(text);
 }
 
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
 	GameManager gameManager;
 	gameManager.exec();

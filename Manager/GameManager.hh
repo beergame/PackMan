@@ -34,10 +34,8 @@ public:
 
 	void Update();
 
-	void isPackmanDead(Packman *);
-
 	void drawString(sf::RenderWindow *, std::string);
-	};
+};
 
 
 #endif //PACKMAN_GAMEMANAGER_HH

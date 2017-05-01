@@ -1,5 +1,5 @@
 #ifndef PACKMAN_MONSTERMANAGER_HH
-#define PACKMAN_MONSTERMANAGER_HH
+# define PACKMAN_MONSTERMANAGER_HH
 
 
 #include <vector>
@@ -9,7 +9,9 @@
 
 class MonsterFactory;
 
-class MonsterManager : public IObserver
+class Packman;
+
+class MonsterManager : public IObservable, public IObserver
 {
 
 private:
@@ -20,15 +22,21 @@ public:
 
 	std::vector<Monster *> getMonsterList();
 
+	void isPackmanVersusMonster(Packman *);
+
 	void addMonster(Monster *);
 
 	void changeStatusMonster();
 
-	void Notify(IObservable *observable);
+	void Notify(IObservable *);
 
 	void Draw(sf::RenderWindow *);
 
-	void Update(Map *map);
+	void Update(Map *);
+
+	void AddObserver(IObserver *);
+
+	void RemoveObserver(IObserver *);
 };
 
 

@@ -2,8 +2,8 @@
 
 Monster::Monster(std::string sprites)
 {
-	Monster::setRessources(sprites);
-	setStatut(0);
+	setResources(sprites);
+	setStatus(0);
 	setTimePowerUpEaten();
 }
 
@@ -16,7 +16,7 @@ void Monster::Update(Map *map)
 
 	navigateTheMaze(map, time);
 	if (diff > Monster::powerUpDuration) {
-		setStatut(0);
+		setStatus(0);
 	}
 }
 
@@ -25,11 +25,11 @@ void Monster::Draw(sf::RenderWindow *window)
 	int posX = 0;
 	sf::Image image;
 	sf::Texture texture;
-	image.loadFromFile(this->getRessources());
+	image.loadFromFile(this->getResources());
 	image.createMaskFromColor(sf::Color::Black);
 	texture.loadFromImage(image);
 
-	switch (Monster::getDirection()) {
+	switch (this->getDirection()) {
 		case 1:
 			posX = 64;
 			break;
@@ -129,3 +129,5 @@ void Monster::navigateTheMaze(Map *map, double time)
 		setY(newY);
 	}
 }
+
+void Notify(IObservable *) {}
