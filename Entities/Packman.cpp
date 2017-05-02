@@ -1,9 +1,5 @@
 #include "Packman.hh"
-//#include "../Manager/MonsterManager.hh"
 
-/**
- * @TODO Temp coordinate, to change when the map is set up
- */
 Packman::Packman(std::string resources)
 {
 	Packman::setResources(resources);
@@ -13,14 +9,14 @@ Packman::Packman(std::string resources)
 	setStatus(0);
 	setDirection(1);
 	setTimePowerUpEaten();
+	chompBuffer.loadFromFile("../Sound/pacman_chomp.wav");
+	chompSound.setBuffer(chompBuffer);
 }
 
-Packman::~Packman()
-{}
+Packman::~Packman() {}
 
 void Packman::Update(Map *map)
 {
-
 	int direction = getDirection();
 	double time = TimeManager::GetInstance().GetElapsedTime();
 	double timeInSecond = time / 1000;
@@ -66,11 +62,13 @@ void Packman::Update(Map *map)
 			setY(newY);
 			break;
 		case 1:
+			playSound();
 			setX(newX);
 			setY(newY);
 			map->cleanElement(newX, newY);
 			break;
 		case 2:
+			playSound();
 			setX(newX);
 			setY(newY);
 			map->cleanElement(newX, newY);
@@ -150,4 +148,9 @@ void Packman::setLife(unsigned int i)
 int Packman::getLife()
 {
 	return life;
+}
+
+void Packman::playSound() {
+    if (chompSound.getStatus() == 0)
+        chompSound.play();
 }

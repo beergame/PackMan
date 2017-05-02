@@ -10,6 +10,8 @@ class Packman : public Character, public IObservable
 {
 private:
 	unsigned int life;
+	sf::SoundBuffer chompBuffer;
+	sf::Sound chompSound;
 public:
 	Packman(std::string);
 
@@ -28,6 +30,8 @@ public:
 	int getLife();
 
 	void setLife(unsigned int);
+
+	void playSound();
 };
 
 

@@ -3,6 +3,7 @@
 
 #include "AbstractEntity.hh"
 #include <string>
+#include <SFML/Audio.hpp>
 
 class Character : public AbstractEntity
 {
