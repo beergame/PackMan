@@ -51,6 +51,9 @@ void Packman::Update(Map *map)
 			break;
 	};
 
+	if (round(newY) == 14) {
+		newX = Shortcut(newX);
+	}
 	newX = checkX(newX);
 	newY = checkY(newY);
 
@@ -150,7 +153,21 @@ int Packman::getLife()
 	return life;
 }
 
-void Packman::playSound() {
-    if (chompSound.getStatus() == 0)
-        chompSound.play();
+void Packman::playSound()
+{
+	if (chompSound.getStatus() == 0) {
+		chompSound.play();
+	}
+}
+
+double Packman::Shortcut(double X)
+{
+	if (round(X) == 0) {
+		return (26);
+	}
+	if (round(X) == 27) {
+		return (1);
+	}
+
+	return (X);
 }

@@ -32,6 +32,8 @@ public:
 	void setLife(unsigned int);
 
 	void playSound();
+
+	double Shortcut(double);
 };
 
 
