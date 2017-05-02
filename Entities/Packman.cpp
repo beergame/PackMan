@@ -24,11 +24,12 @@ void Packman::Update(Map *map)
 	int direction = getDirection();
 	double time = TimeManager::GetInstance().GetElapsedTime();
 	double timeInSecond = time / 1000;
+	double timeFromStart = TimeManager::GetInstance().GetStartedTime() / 1000;
 	double newX = 0;
 	double newY = 0;
 
 	// Check if power-up expire
-	double diff = time - Packman::getTimePowerUpEaten();
+	double diff = timeFromStart - Packman::getTimePowerUpEaten();
 	if (diff > Packman::powerUpDuration) {
 		setStatus(0);
 	}

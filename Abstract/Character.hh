@@ -32,7 +32,8 @@ public:
 
 	void setTimePowerUpEaten();
 
-	static constexpr double powerUpDuration = 15; //second
+	static constexpr double powerUpDuration = 8;
+
 	void setResources(std::string);
 
 	std::string getResources();

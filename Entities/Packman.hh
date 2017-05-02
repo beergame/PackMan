@@ -17,7 +17,7 @@ public:
 
 	void Update(Map *);
 
-	void Notify(IObservable *);
+	void NotifyPackmanVsMonster(Monster *);
 
 	void AddObserver(IObserver *);
 

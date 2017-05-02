@@ -52,12 +52,7 @@ void MonsterManager::Update(Map *map)
 	}
 }
 
-void MonsterManager::AddObserver(IObserver *observer)
+void MonsterManager::setPackmanObserver(Packman *p)
 {
-	observers.push_back(observer);
-}
-
-void MonsterManager::RemoveObserver(IObserver *observer)
-{
-	observers.remove(observer);
+	observer = p;
 }

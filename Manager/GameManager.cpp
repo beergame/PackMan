@@ -12,7 +12,7 @@ GameManager::GameManager()
 	monsterManager = new MonsterManager();
 	monsterFactory->CreateMonster(monsterManager);
 	playerManager->getPackman()->AddObserver(monsterManager);
-	monsterManager->AddObserver(playerManager->getPackman());
+	monsterManager->setPackmanObserver(playerManager->getPackman());
 	font.loadFromFile("../blackWolf.ttf");
 }
 
@@ -60,7 +60,7 @@ void GameManager::exec()
 	TimeManager::GetInstance().Start();
 	window.setFramerateLimit(60);
 
-	while (window.isOpen()) {
+	while (window.isOpen() && getPlayerManager()->getPackman()->getLife()) {
 		window.clear();
 
 		Event event;
@@ -68,7 +68,7 @@ void GameManager::exec()
 		this->getFps(&window);
 		/* draw game info */
 		if (this->getPlayerManager()->getPackman()->isStatus()) {
-			drawString(&window, "Packman power up !!");
+			drawString(&window, 100, "Packman power up !!");
 		}
 
 		while (window.pollEvent(event)) {
@@ -105,10 +105,10 @@ void GameManager::getFps(RenderWindow *window)
 	window->draw(text);
 }
 
-void GameManager::drawString(RenderWindow *window, std::string str)
+void GameManager::drawString(RenderWindow *window, int x, std::string str)
 {
 	Text text(str, font, 20);
-	text.setPosition(100, 10);
+	text.setPosition(x, 10);
 	window->draw(text);
 }
 

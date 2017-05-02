@@ -34,7 +34,7 @@ public:
 
 	void Update();
 
-	void drawString(sf::RenderWindow *, std::string);
+	void drawString(sf::RenderWindow *, int, std::string);
 };
 
 

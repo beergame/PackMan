@@ -7,15 +7,15 @@
 #include "../Utils/IObserver.hh"
 #include "../Entities/Packman.hh"
 
-class MonsterFactory;
-
 class Packman;
 
-class MonsterManager : public IObservable, public IObserver
+class MonsterManager : public IObserver
 {
-
 private:
 	std::vector<Monster *> monsterList;
+
+protected:
+	Packman *observer;
 
 public:
 	MonsterManager();
@@ -34,9 +34,7 @@ public:
 
 	void Update(Map *);
 
-	void AddObserver(IObserver *);
-
-	void RemoveObserver(IObserver *);
+	void setPackmanObserver(Packman *);
 };
 
 

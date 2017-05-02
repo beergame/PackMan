@@ -5,13 +5,17 @@
 #include <iostream>
 #include <list>
 
-class IObservable {
+class IObservable
+{
 public:
-    virtual void AddObserver(IObserver *) = 0;
-    virtual void RemoveObserver(IObserver *) = 0;
-    virtual ~IObservable(){};
+	virtual void AddObserver(IObserver *) = 0;
+
+	virtual void RemoveObserver(IObserver *) = 0;
+
+	virtual ~IObservable() {};
 protected:
-    IObservable(){};
-    std::list<IObserver*> observers;
+	IObservable() {};
+	std::list<IObserver *> observers;
 };
+
 #endif //IOBSERVABLE_HH
