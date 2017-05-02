@@ -52,7 +52,7 @@ void Monster::Draw(sf::RenderWindow *window) {
     }
 
     sf::Sprite sprite(texture, sf::IntRect(posX,0,16,16));
-    sprite.setPosition(((float)Monster::getY() * 8) + 50, ((float)Monster::getX() * 8) + 50);
+    sprite.setPosition(((float)Monster::getX() * 8) + 50, ((float)Monster::getY() * 8) + 50);
     sprite.setScale(1.5, 1.5);
     window->draw(sprite);
 }
