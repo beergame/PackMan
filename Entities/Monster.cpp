@@ -130,4 +130,10 @@ void Monster::navigateTheMaze(Map *map, double time)
 	}
 }
 
-void Notify(IObservable *) {}
+void Monster::reset()
+{
+	setStatus(0);
+	setX(13);
+	setY(11);
+	setTimePowerUpEaten();
+}

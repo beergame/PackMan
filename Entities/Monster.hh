@@ -9,7 +9,7 @@
 #include <time.h>
 #include <stdio.h>
 
-class Monster : public Character, public IObservable
+class Monster : public Character
 {
 public:
 	Monster(std::string);
@@ -22,7 +22,7 @@ public:
 
 	void Draw(sf::RenderWindow *);
 
-	void Notify(IObservable *);
+	void reset();
 
 private:
 	void navigateTheMaze(Map *, double);

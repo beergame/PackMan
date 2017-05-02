@@ -6,7 +6,7 @@
 #include "../Utils/IObservable.hh"
 #include "../Manager/MonsterManager.hh"
 
-class Packman : public Character, public IObservable, public IObserver
+class Packman : public Character, public IObservable
 {
 private:
 	unsigned int life;

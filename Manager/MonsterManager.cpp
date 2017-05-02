@@ -13,9 +13,7 @@ void MonsterManager::isPackmanVersusMonster(Packman *p)
 	for (auto monster : getMonsterList()) {
 		if (round(p->getX()) == round(monster->getX()) &&
 			round(p->getY()) == round(monster->getY())) {
-			for (auto &observer : observers) {
-				observer->Notify(monster);
-			}
+			p->NotifyPackmanVsMonster(monster);
 		}
 	}
 }

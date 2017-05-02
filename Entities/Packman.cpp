@@ -86,13 +86,10 @@ void Packman::Update(Map *map)
 	}
 }
 
-void Packman::Notify(IObservable *monster)
+void Packman::NotifyPackmanVsMonster(Monster *monster)
 {
 	if (isStatus()) {
-		monster->setTimePowerUpEaten();
-		monster->setX(10);
-		monster->setY(10);
-		monster->setDirection(1);
+		monster->reset();
 	} else {
 		setLife(0);
 	}
