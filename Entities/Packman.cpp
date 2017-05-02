@@ -17,7 +17,6 @@ Packman::~Packman() {}
 
 void Packman::Update(Map *map)
 {
-
 	int direction = getDirection();
 	double time = TimeManager::GetInstance().GetElapsedTime();
 	double timeInSecond = time / 1000;
@@ -59,7 +58,6 @@ void Packman::Update(Map *map)
 
 	switch (element) {
 		case 0:
-			playSound();
 			setX(newX);
 			setY(newY);
 			break;
