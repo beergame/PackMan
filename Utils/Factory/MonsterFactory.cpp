@@ -1,8 +1,7 @@
 #include "MonsterFactory.hh"
 #include "../../Manager/MonsterManager.hh"
 
-MonsterFactory::MonsterFactory() {
-}
+MonsterFactory::MonsterFactory() {}
 
 /**
  * Factory, @TODO temp coordinate to change when map is set up
@@ -19,7 +18,7 @@ void MonsterFactory::CreateMonster(MonsterManager* monsterManager) {
     monster3->setX(26);
     monster3->setY(1);
     Monster *monster4 = new Monster("../Sprites/Blue.png");
-    monster4->setX(26);
+    monster4->setX(20);
     monster4->setY(29);
 
     monsterManager->addMonster(monster1);

@@ -9,20 +9,32 @@
 #include <string>
 #include <SFML/System.hpp>
 
-class GameManager {
+class GameManager
+{
 private:
-    PlayerManager* playerManager;
-    MonsterManager* monsterManager;
-    Map* map;
-    void getFps(sf::RenderWindow*);
+	PlayerManager *playerManager;
+	MonsterManager *monsterManager;
+	Map *map;
+	sf::Font font;
+
+	void getFps(sf::RenderWindow *);
+
 public:
-    GameManager();
-    PlayerManager* getPlayerManager();
-    MonsterManager* getMonsterManager();
-    Map* getMap();
-    void Draw(sf::RenderWindow*);
-    void exec();
-    void Update();
+	GameManager();
+
+	PlayerManager *getPlayerManager();
+
+	MonsterManager *getMonsterManager();
+
+	Map *getMap();
+
+	void Draw(sf::RenderWindow *);
+
+	void exec();
+
+	void Update();
+
+	void drawString(sf::RenderWindow *, int, std::string);
 };
 
 
