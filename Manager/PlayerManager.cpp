@@ -1,7 +1,7 @@
 #include "PlayerManager.hh"
 
 PlayerManager::PlayerManager() {
-    packman = new Packman();
+    packman = new Packman("../Sprites/Packman.png");
 }
 
 Packman* PlayerManager::getPackman() {

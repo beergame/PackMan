@@ -5,20 +5,36 @@
 #include "PlayerManager.hh"
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
-#include <SFML/Graphics.hpp>
 #include "../Utils/Factory/MonsterFactory.hh"
+#include <string>
+#include <SFML/System.hpp>
 
-class GameManager {
+class GameManager
+{
 private:
-    PlayerManager* playerManager;
-    MonsterManager* monsterManager;
-    Map* map;
+	PlayerManager *playerManager;
+	MonsterManager *monsterManager;
+	Map *map;
+	sf::Font font;
+
+	void getFps(sf::RenderWindow *);
 
 public:
-    GameManager();
-    PlayerManager* getPlayerManager();
-    MonsterManager* getMonsterManager();
-    Map* getMap();
+	GameManager();
+
+	PlayerManager *getPlayerManager();
+
+	MonsterManager *getMonsterManager();
+
+	Map *getMap();
+
+	void Draw(sf::RenderWindow *);
+
+	void exec();
+
+	void Update();
+
+	void drawString(sf::RenderWindow *, int, std::string);
 };
 
 

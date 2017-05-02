@@ -5,7 +5,7 @@ class IObservable;
 
 class IObserver {
 public:
-    virtual void Notify(IObservable* observable) = 0;
+    virtual void Notify(IObservable *) = 0;
     virtual ~IObserver(){};
 protected:
     IObserver(){};

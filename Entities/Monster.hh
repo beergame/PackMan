@@ -3,17 +3,29 @@
 
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
+#include "../Utils/IObserver.hh"
+#include "../Utils/IObservable.hh"
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
 
-class Monster : public Character{
+class Monster : public Character
+{
 public:
-    Monster();
-    ~Monster();
-    void Update(Map);
-    void changeDirection();
-    void Draw();
+	Monster(std::string);
+
+	~Monster();
+
+	void Update(Map *);
+
+	void changeDirection(Map *);
+
+	void Draw(sf::RenderWindow *);
+
+	void reset();
+
+private:
+	void navigateTheMaze(Map *, double);
 };
 
 

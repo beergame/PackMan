@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <math.h>
+#include <SFML/Graphics.hpp>
+#include <iterator>
 
 class Map {
 private:
@@ -13,6 +15,7 @@ public:
     Map(std::vector<std::vector<int> >);
     std::vector<std::vector<int> > getMap();
     void cleanElement(double, double);
+    void Draw(sf::RenderWindow*);
 };
 
 

@@ -20,12 +20,12 @@ void Character::setY(double Y) {
     Character::Y = Y;
 }
 
-bool Character::isStatut() const {
-    return statut;
+bool Character::isStatus() const {
+    return status;
 }
 
-void Character::setStatut(bool statut) {
-    Character::statut = statut;
+void Character::setStatus(bool status) {
+    Character::status = status;
 }
 
 /*
@@ -51,9 +51,29 @@ double Character::getTimePowerUpEaten() {
  * Save elapsedTime the last time Packman has eaten a power-up
  */
 void Character::setTimePowerUpEaten() {
-    timePowerUpEaten = TimeManager::GetInstance().GetElapsedTime() / 1000;
+    timePowerUpEaten = TimeManager::GetInstance().GetStartedTime() / 1000;
 }
 
 Character::~Character() {
 
+}
+
+void Character::setResources(std::string sprites) {
+    Character::resources = sprites;
+}
+
+std::string Character::getResources() {
+    return Character::resources;
+}
+
+double Character::checkX(double X) {
+    if (X >= 27)
+        return 27;
+    return X;
+}
+
+double Character::checkY(double Y) {
+    if (Y >= 30)
+        return 30;
+    return Y;
 }
