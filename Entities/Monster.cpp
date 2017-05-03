@@ -12,7 +12,8 @@ Monster::~Monster() {}
 void Monster::Update(Map *map)
 {
 	double time = TimeManager::GetInstance().GetElapsedTime();
-	double diff = time - Monster::getTimePowerUpEaten();
+	double timeFromStart = TimeManager::GetInstance().GetStartedTime() / 1000;
+	double diff = timeFromStart - Monster::getTimePowerUpEaten();
 
 	navigateTheMaze(map, time);
 	if (diff > Monster::powerUpDuration) {
@@ -25,25 +26,31 @@ void Monster::Draw(sf::RenderWindow *window)
 	int posX = 0;
 	sf::Image image;
 	sf::Texture texture;
-	image.loadFromFile(this->getResources());
+	if (isStatus()) {
+		image.loadFromFile("../Sprites/coward.png");
+	} else {
+		image.loadFromFile(this->getResources());
+	}
 	image.createMaskFromColor(sf::Color::Black);
 	texture.loadFromImage(image);
 
-	switch (this->getDirection()) {
-		case 1:
-			posX = 64;
-			break;
-		case 2:
-			posX = 0;
-			break;
-		case 3:
-			posX = 96;
-			break;
-		case 4:
-			posX = 32;
-			break;
-		default:
-			break;
+	if (!isStatus()) {
+		switch (this->getDirection()) {
+			case 1:
+				posX = 64;
+				break;
+			case 2:
+				posX = 0;
+				break;
+			case 3:
+				posX = 96;
+				break;
+			case 4:
+				posX = 32;
+				break;
+			default:
+				break;
+		}
 	}
 
 	if ((TimeManager::GetInstance().GetStartedTime() % 1000) > 500) {
