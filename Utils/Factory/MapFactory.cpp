@@ -1,9 +1,9 @@
 #include "MapFactory.hh"
 
-MapFactory::MapFactory() {
-}
+MapFactory::MapFactory() {}
 
-Map *MapFactory::createMap() {
+Map *MapFactory::createMap()
+{
 	std::vector<std::vector<int>> map(28, std::vector<int>(31));
 	for (int i = 1; i < 28; i++) {
 		for (int j = 1; j < 31; j++) {
@@ -28,10 +28,18 @@ Map *MapFactory::createMap() {
 	map = setInternalWall(map);
 
 	Map *result = new Map(map);
+
+	for (int k = 0; k < 3; ++k) {
+		for (int j = 0; j < 2; ++j) {
+			result->packmanPrint[k][j] = 0;
+		}
+	}
+
 	return result;
 }
 
-std::vector<std::vector<int>> MapFactory::setInternalWall(std::vector<std::vector<int>> map) {
+std::vector<std::vector<int>> MapFactory::setInternalWall(std::vector<std::vector<int>> map)
+{
 	for (int i = 1; i < 5; i++) {
 		for (int j = 13; j < 15; j++) {
 			map[j][i] = 3;

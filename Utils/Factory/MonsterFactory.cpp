@@ -9,7 +9,7 @@ MonsterFactory::MonsterFactory() {}
  * @param MonsterManager manager
  * @param Map            map
  */
-void MonsterFactory::CreateMonster(MonsterManager *manager, Map *map)
+void MonsterFactory::CreateMonster(MonsterManager *manager)
 {
 	Monster *monster1 = new Monster("../Sprites/Red.png");
 	monster1->setX(1);

@@ -1,7 +1,6 @@
 #include "Packman.hh"
 
-Packman::Packman(std::string resources)
-{
+Packman::Packman(std::string resources) {
 	Packman::setResources(resources);
 	setLife(1);
 	setX(26);
@@ -15,8 +14,7 @@ Packman::Packman(std::string resources)
 
 Packman::~Packman() {}
 
-void Packman::Update(Map *map)
-{
+void Packman::Update(Map *map) {
 	int direction = getDirection();
 	double time = TimeManager::GetInstance().GetElapsedTime();
 	double timeInSecond = time / 1000;
@@ -61,20 +59,23 @@ void Packman::Update(Map *map)
 
 	switch (element) {
 		case 0:
+			map->movePackmanFp(direction, getX(), getY(), newX, newY);
 			setX(newX);
 			setY(newY);
 			break;
 		case 1:
+			map->cleanElement(newX, newY);
+			map->movePackmanFp(direction, getX(), getY(), newX, newY);
 			playSound();
 			setX(newX);
 			setY(newY);
-			map->cleanElement(newX, newY);
 			break;
 		case 2:
+			map->cleanElement(newX, newY);
+			map->movePackmanFp(direction, getX(), getY(), newX, newY);
 			playSound();
 			setX(newX);
 			setY(newY);
-			map->cleanElement(newX, newY);
 			setTimePowerUpEaten();
 			setStatus(1);
 			for (auto &observer : observers) {
@@ -87,8 +88,7 @@ void Packman::Update(Map *map)
 	}
 }
 
-void Packman::NotifyPackmanVsMonster(Monster *monster)
-{
+void Packman::NotifyPackmanVsMonster(Monster *monster) {
 	if (isStatus()) {
 		monster->reset();
 	} else {
@@ -96,18 +96,15 @@ void Packman::NotifyPackmanVsMonster(Monster *monster)
 	}
 }
 
-void Packman::AddObserver(IObserver *observer)
-{
+void Packman::AddObserver(IObserver *observer) {
 	observers.push_back(observer);
 }
 
-void Packman::RemoveObserver(IObserver *observer)
-{
+void Packman::RemoveObserver(IObserver *observer) {
 	observers.remove(observer);
 }
 
-void Packman::Draw(sf::RenderWindow *window)
-{
+void Packman::Draw(sf::RenderWindow *window) {
 	sf::Image image;
 	sf::Texture texture;
 	image.loadFromFile(getResources());
@@ -143,25 +140,21 @@ void Packman::Draw(sf::RenderWindow *window)
 	window->draw(sprite);
 }
 
-void Packman::setLife(unsigned int i)
-{
+void Packman::setLife(unsigned int i) {
 	life = i;
 }
 
-int Packman::getLife()
-{
+int Packman::getLife() {
 	return life;
 }
 
-void Packman::playSound()
-{
+void Packman::playSound() {
 	if (chompSound.getStatus() == 0) {
 		chompSound.play();
 	}
 }
 
-double Packman::Shortcut(double X)
-{
+double Packman::Shortcut(double X) {
 	if (round(X) == 0) {
 		return (26);
 	}

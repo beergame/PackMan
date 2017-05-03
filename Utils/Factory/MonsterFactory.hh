@@ -10,7 +10,7 @@ class MonsterFactory
 public:
 	MonsterFactory();
 
-	void CreateMonster(MonsterManager *, Map *);
+	void CreateMonster(MonsterManager *);
 };
 
 

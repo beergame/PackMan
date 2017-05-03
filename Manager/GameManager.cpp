@@ -9,7 +9,7 @@ GameManager::GameManager()
 	map = mapFactory->createMap();
 	playerManager = new PlayerManager();
 	monsterManager = new MonsterManager();
-	monsterFactory->CreateMonster(monsterManager, map);
+	monsterFactory->CreateMonster(monsterManager);
 	playerManager->getPackman()->AddObserver(monsterManager);
 	monsterManager->setPackmanObserver(playerManager->getPackman());
 	font.loadFromFile("../blackWolf.ttf");
