@@ -64,39 +64,6 @@ void Monster::Draw(sf::RenderWindow *window)
 	window->draw(sprite);
 }
 
-void Monster::changeDirection(Map *map)
-{
-	double newX = 0, newY = 0;
-
-	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
-		if ((getDirection() + 1) > 4) {
-			setDirection(1);
-		} else {
-			setDirection(getDirection() + 1);
-		}
-		switch (getDirection()) {
-			case 1:
-				newX = getX();
-				newY = getY() - 1;
-				break;
-			case 2:
-				newX = getX() + 1;
-				newY = getY();
-				break;
-			case 3:
-				newX = getX();
-				newY = getY() + 1;
-				break;
-			case 4:
-				newX = getX() + 1;
-				newY = getY();
-				break;
-			default:
-				break;
-		}
-	}
-}
-
 void Monster::navigateTheMaze(Map *map, double time)
 {
 	int direction = getDirection();
@@ -130,7 +97,7 @@ void Monster::navigateTheMaze(Map *map, double time)
 	int element = map->checkMap(newX, newY);
 
 	if (element == 3) {
-		changeDirection(map);
+		(this->*ai)(map);
 	} else {
 		setX(newX);
 		setY(newY);
@@ -143,4 +110,120 @@ void Monster::reset()
 	setX(13);
 	setY(11);
 	setTimePowerUpEaten();
+}
+
+void Monster::clyde(Map *map)
+{
+	double newX = 0, newY = 0;
+
+	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
+		setDirection(rand() % 4 + 1);
+		switch (getDirection()) {
+			case 1:
+				newX = getX();
+				newY = getY() - 1;
+				break;
+			case 2:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			case 3:
+				newX = getX();
+				newY = getY() + 1;
+				break;
+			case 4:
+				newX = getX() - 1;
+				newY = getY();
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+void Monster::blinky(Map *map)
+{
+	double newX = 0, newY = 0;
+
+	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
+		setDirection(rand() % 4 + 1);
+		switch (getDirection()) {
+			case 1:
+				newX = getX();
+				newY = getY() - 1;
+				break;
+			case 2:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			case 3:
+				newX = getX();
+				newY = getY() + 1;
+				break;
+			case 4:
+				newX = getX() - 1;
+				newY = getY();
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+void Monster::pinky(Map *map)
+{
+	double newX = 0, newY = 0;
+
+	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
+		setDirection(rand() % 4 + 1);
+		switch (getDirection()) {
+			case 1:
+				newX = getX();
+				newY = getY() - 1;
+				break;
+			case 2:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			case 3:
+				newX = getX();
+				newY = getY() + 1;
+				break;
+			case 4:
+				newX = getX() - 1;
+				newY = getY();
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+void Monster::inky(Map *map)
+{
+	double newX = 0, newY = 0;
+
+	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
+		setDirection(rand() % 4 + 1);
+		switch (getDirection()) {
+			case 1:
+				newX = getX();
+				newY = getY() - 1;
+				break;
+			case 2:
+				newX = getX() + 1;
+				newY = getY();
+				break;
+			case 3:
+				newX = getX();
+				newY = getY() + 1;
+				break;
+			case 4:
+				newX = getX() - 1;
+				newY = getY();
+				break;
+			default:
+				break;
+		}
+	}
 }

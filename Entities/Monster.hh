@@ -1,5 +1,5 @@
 #ifndef PACKMAN_MONSTER_HH
-#define PACKMAN_MONSTER_HH
+# define PACKMAN_MONSTER_HH
 
 #include "../Abstract/Character.hh"
 #include "../Utils/TimeManager.hh"
@@ -18,7 +18,19 @@ public:
 
 	void Update(Map *);
 
-	void changeDirection(Map *);
+	/* random move */
+	void clyde(Map *);
+
+	/* follower */
+	void blinky(Map *);
+
+	/* hunter */
+	void pinky(Map *);
+
+	/* rogue */
+	void inky(Map *);
+
+	void (Monster::*ai)(Map *);
 
 	void Draw(sf::RenderWindow *);
 

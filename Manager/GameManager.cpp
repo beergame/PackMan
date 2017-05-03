@@ -1,5 +1,4 @@
 #include "GameManager.hh"
-//#include "../build/config.h"
 
 using namespace sf;
 
@@ -10,7 +9,7 @@ GameManager::GameManager()
 	map = mapFactory->createMap();
 	playerManager = new PlayerManager();
 	monsterManager = new MonsterManager();
-	monsterFactory->CreateMonster(monsterManager);
+	monsterFactory->CreateMonster(monsterManager, map);
 	playerManager->getPackman()->AddObserver(monsterManager);
 	monsterManager->setPackmanObserver(playerManager->getPackman());
 	font.loadFromFile("../blackWolf.ttf");
@@ -129,9 +128,10 @@ bool GameManager::isVictorious() {
 
 int main(int ac, char **av)
 {
-    int resExecMenu = Menu::ExecMenu();
-    if (resExecMenu == 2 || resExecMenu == 3)
-        return -1;
+	srand((unsigned) time(0));
+	int resExecMenu = Menu::ExecMenu();
+	if (resExecMenu == 2 || resExecMenu == 3)
+		return -1;
 	GameManager gameManager;
 	gameManager.exec();
 
