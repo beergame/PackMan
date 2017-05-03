@@ -114,6 +114,9 @@ void GameManager::drawString(RenderWindow *window, int x, std::string str)
 
 int main(int ac, char **av)
 {
+    int resExecMenu = Menu::ExecMenu();
+    if (resExecMenu == 2 || resExecMenu == 3)
+        return -1;
 	GameManager gameManager;
 	gameManager.exec();
 

@@ -6,6 +6,7 @@
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
 #include "../Utils/Factory/MonsterFactory.hh"
+#include "../Menu/Menu.hh"
 #include <string>
 #include <SFML/System.hpp>
 
