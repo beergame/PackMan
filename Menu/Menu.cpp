@@ -125,3 +125,37 @@ void Menu::VictoryMenu() {
         }
     }
 }
+
+
+void Menu::GameOverMenu() {
+    sf::VideoMode videoMode(600, 600);
+    sf::RenderWindow gameOverWindow(videoMode, "Packman Game Over");
+    sf::Font font;
+
+    sf::Text text("Game Over !", font, 50);
+    text.setPosition(100, 200);
+    sf::Text text2("Enter to play again\nEscape to close", font, 30);
+    text2.setPosition(100, 300);
+
+    font.loadFromFile("../blackWolf.ttf");
+    while (gameOverWindow.isOpen()) {
+        sf::Event event;
+
+        gameOverWindow.draw(text);
+        gameOverWindow.draw(text2);
+        while (gameOverWindow.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                gameOverWindow.close();
+            }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return) {
+                gameOverWindow.close();
+                GameManager gameManager;
+                gameManager.exec();
+            }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape) {
+                gameOverWindow.close();
+            }
+            gameOverWindow.display();
+        }
+    }
+}

@@ -98,6 +98,10 @@ void GameManager::exec()
 		this->Draw(&window);
 		window.display();
 	}
+    if (!isVictorious())
+    {
+        Menu::GameOverMenu();
+    }
 }
 
 void GameManager::getFps(RenderWindow *window)
