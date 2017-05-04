@@ -100,11 +100,11 @@ void Menu::VictoryMenu() {
     text2.setPosition(100, 300);
 
     font.loadFromFile("../blackWolf.ttf");
+    victoryWindow.clear();
+    victoryWindow.draw(text);
+    victoryWindow.draw(text2);
     while (victoryWindow.isOpen()) {
         sf::Event event;
-
-        victoryWindow.draw(text);
-        victoryWindow.draw(text2);
         while (victoryWindow.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 victoryWindow.close();
@@ -133,11 +133,11 @@ void Menu::GameOverMenu() {
     text2.setPosition(100, 300);
 
     font.loadFromFile("../blackWolf.ttf");
+    gameOverWindow.clear();
+    gameOverWindow.draw(text);
+    gameOverWindow.draw(text2);
     while (gameOverWindow.isOpen()) {
         sf::Event event;
-
-        gameOverWindow.draw(text);
-        gameOverWindow.draw(text2);
         while (gameOverWindow.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 gameOverWindow.close();
