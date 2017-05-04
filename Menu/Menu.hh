@@ -21,6 +21,7 @@ public:
     void MoveDown();
     int static ExecMenu();
     void static VictoryMenu();
+    void static GameOverMenu();
     int GetPressedItem() { return selectedItemIndex; }
 
 };
