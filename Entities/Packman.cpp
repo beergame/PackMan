@@ -89,9 +89,9 @@ void Packman::Update(Map *map) {
 	}
 }
 
-void Packman::NotifyPackmanVsMonster(Monster *monster) {
+void Packman::NotifyPackmanVsMonster(Monster *monster, Map *packMap) {
 	if (isStatus()) {
-		monster->reset();
+		monster->reset(packMap);
 	} else {
 		setLife(0);
 	}

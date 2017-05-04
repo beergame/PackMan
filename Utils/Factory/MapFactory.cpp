@@ -30,6 +30,12 @@ Map *MapFactory::createMap()
 	result->packmanPrint[0][0] = 26;
 	result->packmanPrint[0][1] = 26;
 
+	result->packmanPrint[1][0] = 26;
+	result->packmanPrint[1][1] = 26;
+
+	result->packmanPrint[2][0] = 26;
+	result->packmanPrint[2][1] = 26;
+
 	return result;
 }
 

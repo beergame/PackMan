@@ -36,15 +36,17 @@ public:
 
 	void Draw(sf::RenderWindow *);
 
-	void reset();
+	void reset(Map *);
 
 	bool solveMazeToPackmanFp(int, int, int, int);
 
-	std::vector<std::vector<int>> map;
-
 	void initTrace(Map *pMap);
 
+	std::vector<std::vector<int>> map;
+
+	int latenceTimming;
 private:
+
 	void navigateTheMaze(Map *, double);
 
 	int findTheTraceDirection();

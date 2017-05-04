@@ -49,7 +49,7 @@ void GameManager::Update()
 	this->getPlayerManager()->getPackman()->Update(this->getMap());
 	this->getMonsterManager()->Update(this->getMap());
 	this->getMonsterManager()
-			->isPackmanVersusMonster(getPlayerManager()->getPackman());
+			->isPackmanVersusMonster(getPlayerManager()->getPackman(), this->getMap());
 }
 
 void GameManager::exec()

@@ -13,38 +13,12 @@
  * 4 => bonus score (?)
  */
 
-int Map::checkMap(double X, double Y) {
+int Map::checkMap(double X, double Y)
+{
 	int PositionX = (int) round(X);
 	int PositionY = (int) round(Y);
 
 	return map[PositionX][PositionY];
-}
-
-int Map::checkWays(double X, double Y)
-{
-	int PositionX = (int) round(X);
-	int PositionY = (int) round(Y);
-	int ways = 0;
-
-//	if (PositionX > 1 && PositionX < 28 &&
-//			PositionY > 1 && PositionY < 31) {
-		if (map[PositionX][PositionY + 1] != 3) {
-			ways++;
-		}
-		if (map[PositionX - 1][PositionY] != 3) {
-			ways++;
-		}
-		if (map[PositionX][PositionY - 1] != 3) {
-			ways++;
-		}
-		if (map[PositionX + 1][PositionY] != 3) {
-			ways++;
-		}
-//	}
-//	ways++;
-	std::cout << ways << "\n";
-
-	return (ways > 2);
 }
 
 std::vector<std::vector<int>> Map::getMap()
@@ -67,35 +41,41 @@ void Map::cleanElement(double X, double Y)
 
 void Map::movePackmanFp(int dir, int oldX, int oldY, int X, int Y)
 {
-//	printf("PACKMAN %i %i\n", X, Y);
-
 	if ((oldX != X) || (oldY != Y)) {
 		packmanPrint[0][0] = X;
 		packmanPrint[0][1] = Y;
 		switch (dir) {
 			case 1:
-				packmanPrint[1][0] = X;
-				packmanPrint[1][1] = Y - 2;
-				packmanPrint[2][0] = X;
-				packmanPrint[2][1] = Y + 3;
+				if (Y < 28 && Y > 4) {
+					packmanPrint[1][0] = X;
+					packmanPrint[1][1] = Y;
+					packmanPrint[2][0] = X;
+					packmanPrint[2][1] = Y;
+				}
 				break;
 			case 2:
-				packmanPrint[1][0] = X + 2;
-				packmanPrint[1][1] = Y;
-				packmanPrint[2][0] = X - 3;
-				packmanPrint[2][1] = Y;
+				if (X < 25 && X > 4) {
+					packmanPrint[1][0] = X;
+					packmanPrint[1][1] = Y;
+					packmanPrint[2][0] = X;
+					packmanPrint[2][1] = Y;
+				}
 				break;
 			case 3:
-				packmanPrint[1][0] = X;
-				packmanPrint[1][1] = Y + 2;
-				packmanPrint[2][0] = X;
-				packmanPrint[2][1] = Y - 3;
+				if (Y < 28 && Y > 4) {
+					packmanPrint[1][0] = X;
+					packmanPrint[1][1] = Y;
+					packmanPrint[2][0] = X;
+					packmanPrint[2][1] = Y;
+				}
 				break;
 			case 4:
-				packmanPrint[1][0] = X - 2;
-				packmanPrint[1][1] = Y;
-				packmanPrint[2][0] = X + 3;
-				packmanPrint[2][1] = Y;
+				if (X < 25 && X > 4) {
+					packmanPrint[1][0] = X;
+					packmanPrint[1][1] = Y;
+					packmanPrint[2][0] = X;
+					packmanPrint[2][1] = Y;
+				}
 				break;
 			default:
 				break;

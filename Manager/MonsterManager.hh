@@ -22,7 +22,7 @@ public:
 
 	std::vector<Monster *> getMonsterList();
 
-	void isPackmanVersusMonster(Packman *);
+	void isPackmanVersusMonster(Packman *, Map *);
 
 	void addMonster(Monster *);
 
