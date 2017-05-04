@@ -66,6 +66,11 @@ void GameManager::exec()
 		Event event;
 		this->Update();
 		this->getFps(&window);
+        if (isVictorious()) {
+            window.close();
+            Menu::VictoryMenu();
+            continue;
+        }
 		/* draw game info */
 		if (this->getPlayerManager()->getPackman()->isStatus()) {
 			drawString(&window, 100, "Packman power up !!");
@@ -112,8 +117,21 @@ void GameManager::drawString(RenderWindow *window, int x, std::string str)
 	window->draw(text);
 }
 
+bool GameManager::isVictorious() {
+    for (int i = 0; i < getMap()->getMap().size(); i++) {
+        for (int j = 0; j < getMap()->getMap()[i].size(); j++) {
+            if (getMap()->getMap()[i][j] == 1 || getMap()->getMap()[i][j] == 2)
+                return false;
+        }
+    }
+    return true;
+}
+
 int main(int ac, char **av)
 {
+    int resExecMenu = Menu::ExecMenu();
+    if (resExecMenu == 2 || resExecMenu == 3)
+        return -1;
 	GameManager gameManager;
 	gameManager.exec();
 

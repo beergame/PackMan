@@ -6,6 +6,7 @@
 #include "MonsterManager.hh"
 #include "../Utils/Factory/MapFactory.hh"
 #include "../Utils/Factory/MonsterFactory.hh"
+#include "../Menu/Menu.hh"
 #include <string>
 #include <SFML/System.hpp>
 
@@ -18,6 +19,8 @@ private:
 	sf::Font font;
 
 	void getFps(sf::RenderWindow *);
+
+    bool isVictorious();
 
 public:
 	GameManager();
