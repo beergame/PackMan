@@ -2,6 +2,7 @@
 #define PACKMAN_MENU_HH
 
 #include "SFML/Graphics.hpp"
+#include "../Manager/GameManager.hh"
 
 #define MAX_NUMBER_OF_ITEMS 2
 
