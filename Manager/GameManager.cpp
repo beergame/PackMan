@@ -1,5 +1,4 @@
 #include "GameManager.hh"
-//#include "../build/config.h"
 
 using namespace sf;
 
@@ -10,9 +9,9 @@ GameManager::GameManager()
 	map = mapFactory->createMap();
 	playerManager = new PlayerManager();
 	monsterManager = new MonsterManager();
-	monsterFactory->CreateMonster(monsterManager);
 	playerManager->getPackman()->AddObserver(monsterManager);
 	monsterManager->setPackmanObserver(playerManager->getPackman());
+	monsterFactory->CreateMonster(monsterManager, mapFactory, map);
 	font.loadFromFile("../blackWolf.ttf");
 }
 
@@ -50,7 +49,7 @@ void GameManager::Update()
 	this->getPlayerManager()->getPackman()->Update(this->getMap());
 	this->getMonsterManager()->Update(this->getMap());
 	this->getMonsterManager()
-			->isPackmanVersusMonster(getPlayerManager()->getPackman());
+			->isPackmanVersusMonster(getPlayerManager()->getPackman(), this->getMap());
 }
 
 void GameManager::exec()
@@ -98,6 +97,10 @@ void GameManager::exec()
 		this->Draw(&window);
 		window.display();
 	}
+    if (!isVictorious()) {
+        window.close();
+        Menu::GameOverMenu();
+    }
 }
 
 void GameManager::getFps(RenderWindow *window)
@@ -129,9 +132,10 @@ bool GameManager::isVictorious() {
 
 int main(int ac, char **av)
 {
-    int resExecMenu = Menu::ExecMenu();
-    if (resExecMenu == 2 || resExecMenu == 3)
-        return -1;
+	srand((unsigned) time(0));
+	int resExecMenu = Menu::ExecMenu();
+	if (resExecMenu == 2 || resExecMenu == 3)
+		return -1;
 	GameManager gameManager;
 	gameManager.exec();
 
