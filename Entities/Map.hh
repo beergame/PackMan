@@ -2,9 +2,9 @@
 # define PACKMAN_MAP_HH
 
 # include <vector>
-#include <math.h>
-#include <SFML/Graphics.hpp>
-#include <iterator>
+# include <math.h>
+# include <SFML/Graphics.hpp>
+# include <iterator>
 
 class Map
 {
@@ -18,9 +18,9 @@ public:
 
 	int checkWays(double, double);
 
-	Map(std::vector<std::vector<int> >);
+	Map(std::vector<std::vector<int>>);
 
-	std::vector<std::vector<int> > getMap();
+	std::vector<std::vector<int>> getMap();
 
 	void cleanElement(double, double);
 

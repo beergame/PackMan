@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Map.hh"
 
 /**
@@ -25,21 +26,23 @@ int Map::checkWays(double X, double Y)
 	int PositionY = (int) round(Y);
 	int ways = 0;
 
-	if (PositionX > 1 && PositionX < map.size() &&
-			PositionY > 1 && PositionY < map[0].size()) {
-		if (map[PositionX - 1][PositionY] != 3) {
+//	if (PositionX > 1 && PositionX < 28 &&
+//			PositionY > 1 && PositionY < 31) {
+		if (map[PositionX][PositionY + 1] != 3) {
 			ways++;
 		}
-		if (map[PositionX + 1][PositionY] != 3) {
+		if (map[PositionX - 1][PositionY] != 3) {
 			ways++;
 		}
 		if (map[PositionX][PositionY - 1] != 3) {
 			ways++;
 		}
-		if (map[PositionX][PositionY + 1] != 3) {
+		if (map[PositionX + 1][PositionY] != 3) {
 			ways++;
 		}
-	}
+//	}
+//	ways++;
+	std::cout << ways << "\n";
 
 	return (ways > 2);
 }
@@ -64,6 +67,8 @@ void Map::cleanElement(double X, double Y)
 
 void Map::movePackmanFp(int dir, int oldX, int oldY, int X, int Y)
 {
+//	printf("PACKMAN %i %i\n", X, Y);
+
 	if ((oldX != X) || (oldY != Y)) {
 		packmanPrint[0][0] = X;
 		packmanPrint[0][1] = Y;

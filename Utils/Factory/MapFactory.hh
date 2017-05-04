@@ -1,16 +1,17 @@
 #ifndef PACKMAN_MAPFACTORY_HH
-#define PACKMAN_MAPFACTORY_HH
+# define PACKMAN_MAPFACTORY_HH
 
-#include "../../Entities/Map.hh"
-#include <vector>
+# include"../../Entities/Map.hh"
+# include <vector>
 
-class MapFactory {
+class MapFactory
+{
 public:
-    MapFactory();
-    Map* createMap();
+	MapFactory();
 
-private:
-    std::vector<std::vector<int>> setInternalWall(std::vector<std::vector<int>>);
+	Map *createMap();
+
+	std::vector<std::vector<int>> setInternalWall(std::vector<std::vector<int>>);
 };
 
 

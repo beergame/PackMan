@@ -1,3 +1,4 @@
+#include <zconf.h>
 #include "Monster.hh"
 
 Monster::Monster(std::string sprites)
@@ -57,52 +58,55 @@ void Monster::Draw(sf::RenderWindow *window)
 		posX += 16;
 	}
 
-
 	sf::Sprite sprite(texture, sf::IntRect(posX, 0, 16, 16));
 	sprite.setPosition(((float) Monster::getX() * 16) + 50, ((float) Monster::getY() * 16) + 50);
 	sprite.setScale(1.5, 1.5);
 	window->draw(sprite);
 }
 
-void Monster::navigateTheMaze(Map *map, double time)
+void PrintDaMaze(std::vector<std::vector<int>> map)
 {
-	int direction = getDirection();
+	for (int i = 0; i < 31; ++i) {
+		for (int j = 0; j < 28; ++j) {
+			printf("%i", map[j][i]);
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+}
+
+void Monster::navigateTheMaze(Map *packMap, double time)
+{
 	double timeInSecond = time / 1000;
 	double newY = 0;
 	double newX = 0;
 
-	switch (direction) {
+	switch (findTheTraceDirection()) {
 		case 1:
 			newX = getX();
-			newY = getY() - (timeInSecond * 3);
+			newY = getY() - (timeInSecond * 4);
 			break;
 		case 2:
-			newX = getX() + (timeInSecond * 3);
+			newX = getX() + (timeInSecond * 4);
 			newY = getY();
 			break;
 		case 3:
 			newX = getX();
-			newY = getY() + (timeInSecond * 3);
+			newY = getY() + (timeInSecond * 4);
 			break;
 		case 4:
-			newX = getX() - (timeInSecond * 3);
+			newX = getX() - (timeInSecond * 4);
 			newY = getY();
 			break;
 		default:
 			break;
 	};
 
-	newX = checkX(newX);
-	newY = checkY(newY);
-	int newWay = map->checkWays(getX(), getY());
-	int wall = map->checkMap(newX, newY);
-
-	if (wall == 3) {
-		(this->*ai)(map);
-	}else if (newWay) {
-		(this->*ai)(map);
-		setX(newX);
-		setY(newY);
+	this->latenceAi++;
+	if (this->latenceAi > 200) {
+		this->latenceAi = 0;
+		clearTrace();
+		(this->*ai)(packMap);
 	} else {
 		setX(newX);
 		setY(newY);
@@ -115,102 +119,220 @@ void Monster::reset()
 	setX(13);
 	setY(11);
 	setTimePowerUpEaten();
+	clearTrace();
+//	(this->*ai)();
 }
 
-bool Monster::SolveMazeToPackmanFp(Map *map, int X, int Y)
+bool Monster::solveMazeToPackmanFp(int X, int Y, int pY, int pX)
 {
-	// Make the move (if it's wrong, we will backtrack later.
-	Maze[Y][X] = SomeDude;
+	map[Y][X] = 1;
 
-	// If you want progressive update, uncomment these lines...
-	//PrintDaMaze();
-	//Sleep(50);
+	PrintDaMaze(map);
+	usleep(100000);
 
-	// Check if we have reached our goal.
-	if (X == EndingPoint.X && Y == EndingPoint.Y)
+	if (Y == pX && X == pY)
 	{
 		return true;
 	}
 
-	// Recursively search for our goal.
-	if (X > 0 && Maze[Y][X - 1] == Free && Solve(X - 1, Y))
-	{
-		return true;
-	}
-	if (X < MazeWidth && Maze[Y][X + 1] == Free && Solve(X + 1, Y))
-	{
-		return true;
-	}
-	if (Y > 0 && Maze[Y - 1][X] == Free && Solve(X, Y - 1))
-	{
-		return true;
-	}
-	if (Y < MazeHeight && Maze[Y + 1][X] == Free && Solve(X, Y + 1))
-	{
-		return true;
+	/* Recursively search for our goal */
+	if (pY < Y) {
+		if (pY > Y) {
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+		} else if (pX < X) {
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+		} else if (pX == X) {
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+		}
+	} else if (pY > Y) {
+		if (pX > X) {
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+		} else if (pX < X) {
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+		} else if (pX == X) {
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+		}
+	} else if (pY == Y) {
+		if (pX > X) {
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				printf("\n\n\n");
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+		} else if (pX < X) {
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+		}
 	}
 
-	// Otherwise we need to backtrack and find another solution.
-	Maze[Y][X] = Free;
+	/* backtrack and find another solution */
+	map[Y][X] = 0;
 
-	// If you want progressive update, uncomment these lines...
-	//PrintDaMaze();
-	//Sleep(50);
-	return false;
+	PrintDaMaze(map);
+	usleep(100000);
+
+	return (false);
 }
 
 
 /* follower */
-void Monster::clyde(Map *map)
+void Monster::blinky(Map *packMap)
 {
-	double newX = 0, newY = 0;
-	int dir;
+	int x = packMap->packmanPrint[0][0];
+	int y = packMap->packmanPrint[0][1];
 
-	/* dir 1 + 2 */
-	if (map->packmanPrint[0][0] >= getX() && map->packmanPrint[0][1] >= getY()) {
-		dir = 1;
-		/* dir 3 + 4 */
-	} else if (map->packmanPrint[0][0] <= getX() && map->packmanPrint[0][1] >= getY()) {
-		dir = 3;
-		/* dir 2 + 3 */
-	} else if (map->packmanPrint[0][0] >= getX() && map->packmanPrint[0][1] <= getY()) {
-		dir = 2;
-		/* dir 4 + 1 */
+	if (solveMazeToPackmanFp(getY(), getX(), y, x)) {
+		PrintDaMaze(map);
 	} else {
-		dir = 4;
+		PrintDaMaze(map);
+		std::cout << x << "\n";
+		std::cout << y << "\n";
+		std::cout << "PLANTAGEEEEE\n";
 	}
-
-	while (map->getMap()[(int) round(newX)][(int) round(newY)] == 3) {
-		dir++;
-		if (dir > 4) {
-			dir = 1;
-		}
-		switch (dir) {
-			case 1:
-				newX = getX();
-				newY = getY() - 1;
-				break;
-			case 2:
-				newX = getX() + 1;
-				newY = getY();
-				break;
-			case 3:
-				newX = getX();
-				newY = getY() + 1;
-				break;
-			case 4:
-				newX = getX() - 1;
-				newY = getY();
-				break;
-			default:
-				break;
-		}
-	}
-	setDirection(dir);
 }
 
 /* random move */
-void Monster::blinky(Map *map)
+void Monster::clyde(Map *map)
 {
 	double newX = 0, newY = 0;
 
@@ -298,4 +420,48 @@ void Monster::inky(Map *map)
 				break;
 		}
 	}
+}
+
+void Monster::initTrace(Map *pMap)
+{
+	/* init the trace */
+	(this->*ai)(pMap);
+}
+
+int Monster::findTheTraceDirection()
+{
+	map[getX()][getY()] = 0;
+	printf("%lf %lf", getX(), getY());
+	if (getY() < 29 && map[getX()][getY() + 1] == 1) {
+		std::cout << "bas\n";
+		setDirection(3);
+		return (3);
+	} else if (getY() > 1 && map[getX()][getY() - 1] == 1) {
+		std::cout << "haut\n";
+		setDirection(1);
+		return (1);
+	} else if (getX() < 26 && map[getX() + 1][getY()] == 1) {
+		std::cout << "droite\n";
+		setDirection(2);
+		return (2);
+	} else if (getX() > 1 && map[getX() - 1][getY()] == 1) {
+		std::cout << "gauche\n";
+		setDirection(4);
+		return (4);
+	}
+
+	printf("%lf %lf", getX(), getY());
+	return (0);
+}
+
+void Monster::clearTrace()
+{
+	for (int i = 0; i < 28; ++i) {
+		for (int j = 0; j < 31; ++j) {
+			if (map[i][j] == 1) {
+				map[i][j] = 0;
+			}
+		}
+	}
+
 }

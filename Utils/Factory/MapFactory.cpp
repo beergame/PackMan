@@ -5,25 +5,17 @@ MapFactory::MapFactory() {}
 Map *MapFactory::createMap()
 {
 	std::vector<std::vector<int>> map(28, std::vector<int>(31));
+
 	for (int i = 1; i < 28; i++) {
 		for (int j = 1; j < 31; j++) {
 			map[i][j] = 1;
 		}
 	}
+
 	map[1][1] = 2;
 	map[26][1] = 2;
 	map[1][29] = 2;
 	map[26][29] = 2;
-
-	for (int j = 0; j < 31; j++) {
-		map[0][j] = 3;
-		map[27][j] = 3;
-	}
-
-	for (int i = 0; i < 28; i++) {
-		map[i][0] = 3;
-		map[i][30] = 3;
-	}
 
 	map = setInternalWall(map);
 
@@ -35,11 +27,24 @@ Map *MapFactory::createMap()
 		}
 	}
 
+	result->packmanPrint[0][0] = 26;
+	result->packmanPrint[0][1] = 26;
+
 	return result;
 }
 
 std::vector<std::vector<int>> MapFactory::setInternalWall(std::vector<std::vector<int>> map)
 {
+	for (int j = 0; j < 31; j++) {
+		map[0][j] = 3;
+		map[27][j] = 3;
+	}
+
+	for (int i = 0; i < 28; i++) {
+		map[i][0] = 3;
+		map[i][30] = 3;
+	}
+
 	for (int i = 1; i < 5; i++) {
 		for (int j = 13; j < 15; j++) {
 			map[j][i] = 3;

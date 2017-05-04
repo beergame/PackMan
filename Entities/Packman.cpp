@@ -3,6 +3,7 @@
 Packman::Packman(std::string resources) {
 	Packman::setResources(resources);
 	setLife(1);
+	/* when modify x/y modify fp to !! */
 	setX(26);
 	setY(26);
 	setStatus(0);
@@ -59,20 +60,20 @@ void Packman::Update(Map *map) {
 
 	switch (element) {
 		case 0:
-			map->movePackmanFp(direction, getX(), getY(), newX, newY);
+			map->movePackmanFp(direction, (int) round(getX()), (int) round(getY()), (int) round(newX), (int) round(newY));
 			setX(newX);
 			setY(newY);
 			break;
 		case 1:
 			map->cleanElement(newX, newY);
-			map->movePackmanFp(direction, getX(), getY(), newX, newY);
+			map->movePackmanFp(direction, (int) round(getX()), (int) round(getY()), (int) round(newX), (int) round(newY));
 			playSound();
 			setX(newX);
 			setY(newY);
 			break;
 		case 2:
 			map->cleanElement(newX, newY);
-			map->movePackmanFp(direction, getX(), getY(), newX, newY);
+			map->movePackmanFp(direction, (int) round(getX()), (int) round(getY()), (int) round(newX), (int) round(newY));
 			playSound();
 			setX(newX);
 			setY(newY);
