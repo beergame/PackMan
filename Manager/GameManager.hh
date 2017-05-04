@@ -20,6 +20,8 @@ private:
 
 	void getFps(sf::RenderWindow *);
 
+    bool isVictorious();
+
 public:
 	GameManager();
 

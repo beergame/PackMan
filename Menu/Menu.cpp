@@ -3,6 +3,7 @@
 //
 
 #include "Menu.hh"
+#include "../Manager/GameManager.hh"
 
 Menu::Menu(float width, float height)
 {
@@ -91,4 +92,37 @@ int Menu::ExecMenu()
         window.display();
     }
     return 0;
+}
+
+void Menu::VictoryMenu() {
+    sf::VideoMode videoMode(600, 600);
+    sf::RenderWindow victoryWindow(videoMode, "Packman victory");
+    sf::Font font;
+
+    sf::Text text("Victory!", font, 50);
+    text.setPosition(100, 200);
+    sf::Text text2("Enter to play again\nEscape to close", font, 30);
+    text2.setPosition(100, 300);
+
+    font.loadFromFile("../blackWolf.ttf");
+    while (victoryWindow.isOpen()) {
+        sf::Event event;
+
+        victoryWindow.draw(text);
+        victoryWindow.draw(text2);
+        while (victoryWindow.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                victoryWindow.close();
+            }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Return) {
+                victoryWindow.close();
+                GameManager gameManager;
+                gameManager.exec();
+            }
+            if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape) {
+                victoryWindow.close();
+            }
+            victoryWindow.display();
+        }
+    }
 }
