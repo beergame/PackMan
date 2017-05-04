@@ -3,7 +3,6 @@
 //
 
 #include "Menu.hh"
-#include "../Manager/GameManager.hh"
 
 Menu::Menu(float width, float height)
 {
