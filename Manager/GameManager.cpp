@@ -65,11 +65,10 @@ void GameManager::exec()
 		Event event;
 		this->Update();
 		this->getFps(&window);
-        if (isVictorious()) {
-            window.close();
-            Menu::VictoryMenu();
-            continue;
-        }
+		if (isVictorious()) {
+			Menu::VictoryMenu(&window, &font);
+			continue;
+		}
 		/* draw game info */
 		if (this->getPlayerManager()->getPackman()->isStatus()) {
 			drawString(&window, 100, "Packman power up !!");
@@ -97,16 +96,15 @@ void GameManager::exec()
 		this->Draw(&window);
 		window.display();
 	}
-    if (!isVictorious()) {
-        window.close();
-        Menu::GameOverMenu();
-    }
+	if (!isVictorious()) {
+		Menu::GameOverMenu(&window, &font);
+	}
 }
 
 void GameManager::getFps(RenderWindow *window)
 {
 	int fps = (TimeManager::GetInstance().GetElapsedTime()) ?
-	1000 / TimeManager::GetInstance().GetElapsedTime() : 0;
+			  1000 / TimeManager::GetInstance().GetElapsedTime() : 0;
 	std::string fpsToString = std::to_string(fps) + " fps";
 	Text text(fpsToString, font, 20);
 	text.setPosition(0, 0);
@@ -120,14 +118,15 @@ void GameManager::drawString(RenderWindow *window, int x, std::string str)
 	window->draw(text);
 }
 
-bool GameManager::isVictorious() {
-    for (int i = 0; i < getMap()->getMap().size(); i++) {
-        for (int j = 0; j < getMap()->getMap()[i].size(); j++) {
-            if (getMap()->getMap()[i][j] == 1 || getMap()->getMap()[i][j] == 2)
-                return false;
-        }
-    }
-    return true;
+bool GameManager::isVictorious()
+{
+	for (int i = 0; i < getMap()->getMap().size(); i++) {
+		for (int j = 0; j < getMap()->getMap()[i].size(); j++) {
+			if (getMap()->getMap()[i][j] == 1 || getMap()->getMap()[i][j] == 2)
+				return false;
+		}
+	}
+	return true;
 }
 
 int main(int ac, char **av)
