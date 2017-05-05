@@ -1,5 +1,4 @@
 #include "GameManager.hh"
-//#include "../build/config.h"
 
 using namespace sf;
 
@@ -10,9 +9,9 @@ GameManager::GameManager()
 	map = mapFactory->createMap();
 	playerManager = new PlayerManager();
 	monsterManager = new MonsterManager();
-	monsterFactory->CreateMonster(monsterManager);
 	playerManager->getPackman()->AddObserver(monsterManager);
 	monsterManager->setPackmanObserver(playerManager->getPackman());
+	monsterFactory->CreateMonster(monsterManager, mapFactory, map);
 	font.loadFromFile("../blackWolf.ttf");
 }
 
@@ -50,7 +49,7 @@ void GameManager::Update()
 	this->getPlayerManager()->getPackman()->Update(this->getMap());
 	this->getMonsterManager()->Update(this->getMap());
 	this->getMonsterManager()
-			->isPackmanVersusMonster(getPlayerManager()->getPackman());
+			->isPackmanVersusMonster(getPlayerManager()->getPackman(), this->getMap());
 }
 
 void GameManager::exec()
@@ -66,6 +65,10 @@ void GameManager::exec()
 		Event event;
 		this->Update();
 		this->getFps(&window);
+		if (isVictorious()) {
+			Menu::VictoryMenu(&window, &font);
+			continue;
+		}
 		/* draw game info */
 		if (this->getPlayerManager()->getPackman()->isStatus()) {
 			drawString(&window, 100, "Packman power up !!");
@@ -93,12 +96,15 @@ void GameManager::exec()
 		this->Draw(&window);
 		window.display();
 	}
+	if (!isVictorious()) {
+		Menu::GameOverMenu(&window, &font);
+	}
 }
 
 void GameManager::getFps(RenderWindow *window)
 {
 	int fps = (TimeManager::GetInstance().GetElapsedTime()) ?
-	1000 / TimeManager::GetInstance().GetElapsedTime() : 0;
+			  1000 / TimeManager::GetInstance().GetElapsedTime() : 0;
 	std::string fpsToString = std::to_string(fps) + " fps";
 	Text text(fpsToString, font, 20);
 	text.setPosition(0, 0);
@@ -112,8 +118,23 @@ void GameManager::drawString(RenderWindow *window, int x, std::string str)
 	window->draw(text);
 }
 
+bool GameManager::isVictorious()
+{
+	for (int i = 0; i < getMap()->getMap().size(); i++) {
+		for (int j = 0; j < getMap()->getMap()[i].size(); j++) {
+			if (getMap()->getMap()[i][j] == 1 || getMap()->getMap()[i][j] == 2)
+				return false;
+		}
+	}
+	return true;
+}
+
 int main(int ac, char **av)
 {
+	srand((unsigned) time(0));
+	int resExecMenu = Menu::ExecMenu();
+	if (resExecMenu == 2 || resExecMenu == 3)
+		return -1;
 	GameManager gameManager;
 	gameManager.exec();
 

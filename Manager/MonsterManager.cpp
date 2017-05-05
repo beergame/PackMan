@@ -8,12 +8,12 @@ std::vector<Monster *> MonsterManager::getMonsterList()
 	return (monsterList);
 }
 
-void MonsterManager::isPackmanVersusMonster(Packman *p)
+void MonsterManager::isPackmanVersusMonster(Packman *p, Map *m)
 {
 	for (auto monster : getMonsterList()) {
 		if (round(p->getX()) == round(monster->getX()) &&
 			round(p->getY()) == round(monster->getY())) {
-			p->NotifyPackmanVsMonster(monster);
+			p->NotifyPackmanVsMonster(monster, m);
 		}
 	}
 }
