@@ -99,6 +99,7 @@ void Monster::navigateTheMaze(Map *packMap, double time)
 			newY = getY();
 			break;
 		default:
+			reset(packMap);
 			break;
 	};
 
@@ -127,14 +128,16 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 {
 	map[Y][X] = 1;
 
+//	PrintDaMaze(map);
+//	usleep(100000);
 
 	if (Y == pX && X == pY) {
 		return true;
 	}
 
 	/* Recursively search for our goal */
-	if (Y > pY) {
-		if (X < pX) {
+	if (Y > pX) {
+		if (X < pY) {
 			/* DOWN PRIVILEGE */
 			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
 				return true;
@@ -154,7 +157,7 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
 				return true;
 			}
-		} else if (X > pX) {
+		} else if (X > pY) {
 			/* UP PRIVILEGE */
 			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
 				return true;
@@ -174,7 +177,7 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
 				return true;
 			}
-		} else if (X == pX) {
+		} else if (X == pY) {
 			/* LEFT PRIVILEGE */
 			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
 				return true;
@@ -187,68 +190,6 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 
 			/* RIGHT PRIVILEGE */
 			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
-				return true;
-			}
-
-			/* DOWN PRIVILEGE */
-			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
-				return true;
-			}
-		}
-	} else if (Y < pY) {
-		if (X < pX) {
-			/* DOWN PRIVILEGE */
-			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
-				return true;
-			}
-
-			/* RIGHT PRIVILEGE */
-			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
-				return true;
-			}
-
-			/* UP PRIVILEGE */
-			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
-				return true;
-			}
-
-			/* LEFT PRIVILEGE */
-			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
-				return true;
-			}
-		} else if (X > pX) {
-			/* UP PRIVILEGE */
-			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
-				return true;
-			}
-
-			/* RIGHT PRIVILEGE */
-			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
-				return true;
-			}
-
-			/* DOWN PRIVILEGE */
-			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
-				return true;
-			}
-
-			/* LEFT PRIVILEGE */
-			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
-				return true;
-			}
-		} else if (pX == X) {
-			/* RIGHT PRIVILEGE */
-			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
-				return true;
-			}
-
-			/* UP PRIVILEGE */
-			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
-				return true;
-			}
-
-			/* LEFT PRIVILEGE */
-			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
 				return true;
 			}
 
@@ -257,8 +198,70 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 				return true;
 			}
 		}
-	} else if (pY == Y) {
-		if (pX > X) {
+	} else if (Y < pX) {
+		if (X < pY) {
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+		} else if (X > pY) {
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+		} else if (X == pY) {
+			/* RIGHT PRIVILEGE */
+			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
+				return true;
+			}
+
+			/* UP PRIVILEGE */
+			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
+				return true;
+			}
+
+			/* LEFT PRIVILEGE */
+			if (Y > 0 && map[Y - 1][X] == 0 && solveMazeToPackmanFp(X, Y - 1, pX, pY)) {
+				return true;
+			}
+
+			/* DOWN PRIVILEGE */
+			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
+				return true;
+			}
+		}
+	} else if (Y == pX) {
+		if (pY > X) {
 			/* DOWN PRIVILEGE */
 			if (X < 31 && map[Y][X + 1] == 0 && solveMazeToPackmanFp(X + 1, Y, pX, pY)) {
 				return true;
@@ -278,7 +281,7 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 			if (Y < 28 && map[Y + 1][X] == 0 && solveMazeToPackmanFp(X, Y + 1, pX, pY)) {
 				return true;
 			}
-		} else if (pX < X) {
+		} else if (pY < X) {
 			/* UP PRIVILEGE */
 			if (X > 0 && map[Y][X - 1] == 0 && solveMazeToPackmanFp(X - 1, Y, pX, pY)) {
 				return true;
@@ -303,6 +306,9 @@ bool Monster::solveMazeToPackmanFp(int X, int Y, int pX, int pY)
 
 	/* backtrack and find another solution */
 	map[Y][X] = 0;
+
+//	PrintDaMaze(map);
+//	usleep(100000);
 
 	return (false);
 }
