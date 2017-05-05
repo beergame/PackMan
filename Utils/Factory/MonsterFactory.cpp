@@ -30,7 +30,7 @@ void MonsterFactory::CreateMonster(MonsterManager *manager, MapFactory *factory,
 	std::vector<std::vector<int>> map2(28, std::vector<int>(31));
 	monster2->map = factory->setInternalWall(map2);
 	monster2->initTrace(packMap);
-	monster2->latenceTimming = 500;
+	monster2->latenceTimming = 100;
 
 	Monster *monster3 = new Monster("../Sprites/Pink.png");
 	monster3->setX(13);
