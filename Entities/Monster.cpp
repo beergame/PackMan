@@ -84,18 +84,18 @@ void Monster::navigateTheMaze(Map *packMap, double time)
 	switch (findTheTraceDirection()) {
 		case 1:
 			newX = getX();
-			newY = getY() - (timeInSecond * 4);
+			newY = getY() - (timeInSecond * 5);
 			break;
 		case 2:
-			newX = getX() + (timeInSecond * 4);
+			newX = getX() + (timeInSecond * 5);
 			newY = getY();
 			break;
 		case 3:
 			newX = getX();
-			newY = getY() + (timeInSecond * 4);
+			newY = getY() + (timeInSecond * 5);
 			break;
 		case 4:
-			newX = getX() - (timeInSecond * 4);
+			newX = getX() - (timeInSecond * 5);
 			newY = getY();
 			break;
 		default:
@@ -329,8 +329,8 @@ void Monster::blinky(Map *packMap)
 /* random move */
 void Monster::clyde(Map *packMap)
 {
-	int x = (rand() % 1) ? 1 : 26;
-	int y = (rand() % 1) ? 26 : 1;
+	int x = (rand() % 1) ? 1  : 25;
+	int y = (rand() % 1) ? 25 : 1;
 
 	if (!solveMazeToPackmanFp(getY(), getX(), x, y)) {
 		printf("clyde PLANTE\n");

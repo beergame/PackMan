@@ -109,7 +109,6 @@ void Menu::VictoryMenu(sf::RenderWindow *victoryWindow, sf::Font *font)
 			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape) {
 				victoryWindow->close();
 			}
-			victoryWindow->display();
 		}
 	}
 }
@@ -139,7 +138,6 @@ void Menu::GameOverMenu(sf::RenderWindow *gameOverWindow, sf::Font *font)
 			if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Escape) {
 				gameOverWindow->close();
 			}
-			gameOverWindow->display();
 		}
 	}
 }
